@@ -1,0 +1,43 @@
+.product-listing-container {
+    display: flex;
+    padding: 1% 2%;
+}
+
+.product-listing-container .products {
+    padding: 0 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    justify-content: flex-start;
+    align-content: flex-start;
+    height: auto;
+    overflow-y: auto;
+}
+
+.product-listing-container .filters {
+    padding: 0 2% 0 0;
+
+}
+
+.product-listing-container .filters .filter-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-card-div {
+    position: relative;
+}
+
+.wishlist-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: transparent;
+    border: 0;
+    color: grey;
+    cursor: pointer;
+}
+
+.wishlist-btn .liked {
+    color: red;
+}

@@ -1,0 +1,103 @@
+.footer-container {
+  padding: 80px;
+  margin: 50px 0 0 0;
+  background-color: rgb(242, 248, 255);
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.footer-container .logoandname {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.footer-container .logoandname img {
+  height: 80px;
+  width: auto;
+  margin: 0;
+}
+
+.footer-container .logoandname h2 {
+  font-size: xx-large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.footer-container .left {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  align-items: center;
+}
+
+.footer-container .left p {
+  margin: 0 0 0 24px;
+  text-align: center;
+}
+
+.footer-container .left .contacticons ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 20px 0 0 30px;
+}
+
+.footer-container .left .contacticons ul li {
+  list-style-type: none;
+  border: 2px grey solid;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.footer-container .left .contacticons ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.footer-container .left .contacticons ul li:hover {
+  background-color: lightskyblue;
+  color: white;
+}
+
+.footer-container .middle p {
+  font-size: xx-large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-bottom: 0;
+}
+
+.footer-container .middle .myaccountlist ul {
+  padding: 0;
+  text-align: center;
+}
+
+.footer-container .middle .myaccountlist ul li {
+  list-style-type: none;
+  margin: 0;
+}
+
+.footer-container .right p {
+  font-size: xx-large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.footer-container .right .pageslist ul {
+  padding: 0;
+  text-align: center;
+
+}
+
+.footer-container .right .pageslist ul li {
+  list-style-type: none;
+  margin: 0;
+}
+
+.footer-container .link {
+  text-decoration: none;
+  color: black;
+}

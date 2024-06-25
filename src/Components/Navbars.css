@@ -1,0 +1,286 @@
+.navbar-container {
+  border-bottom: 1px solid black;
+  padding: 0 70px 0 150px;
+}
+
+.navbar-container ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+}
+
+.navbar-container ul li {
+  list-style-type: none;
+}
+
+.navbar-container .logoandname {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(20, 70, 121);
+}
+
+.navbar-container .logoandname Link {
+  text-decoration: none;
+
+
+}
+
+.navbar-container img {
+  height: 55px;
+  width: auto;
+}
+
+.navbar-container .searchbox form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.navbar-container .searchbox form input {
+  width: 500px;
+
+}
+
+.navbar-container .searchbox form button {
+  width: 60px;
+  height: 31px;
+  text-align: center;
+  margin: 0;
+  border: 0;
+}
+
+.navbar-container .searchbox input {
+  width: 40rem;
+  height: 31px;
+  border: rgb(88, 158, 229) solid 3px;
+  color: rgb(162, 160, 160);
+}
+
+.navbar-container .searchbox button {
+  border: 1px rgb(88, 158, 229) solid;
+  background-color: rgb(88, 158, 229);
+  cursor: pointer;
+  color: white;
+  outline: none;
+  padding: 9px 9px 10px;
+
+  text-align: center;
+}
+
+.navbar-container .usericons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navbar-container .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.navbar-container ul li .link {
+  text-decoration: none;
+  color: black;
+}
+
+.navlink-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 10px;
+}
+
+.navlink-container ul {
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 0 25%;
+
+}
+
+.navlink-container ul li {
+  font-weight: 600;
+  list-style-type: none;
+
+}
+
+.navlink-container ul li .link {
+  text-decoration: none;
+  color: black;
+  transition: 0.5s;
+}
+
+.navlink-container ul li .link:hover {
+  color: rgb(88, 158, 229);
+}
+
+.navlink-container .auth button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: medium;
+}
+
+/*RESPONSIVE USING MEDIA QUERY */
+
+@media (max-width : 426px) {
+
+
+  .navbar-container .logoandname h2 {
+    display: none;
+  }
+
+  .navbar-container .logoandname img {
+    height: 40px;
+    width: auto;
+  }
+
+  .navbar-container .searchbox input {
+    width: 10rem;
+  }
+
+  .navbar-container .usericons p {
+    display: none;
+  }
+
+  .navbar-container .icon p {
+    display: none;
+  }
+
+  .navlink-container {
+    width: 100%;
+  }
+
+  .navlink-container ul {
+    margin: 0 5%;
+  }
+
+  .navlink-container ul li {
+    display: flex;
+    margin: 0;
+    font-size: 0.8rem;
+    padding: 0;
+    align-items: center;
+
+  }
+
+}
+
+
+@media (max-width : 769px) {
+  .navbar-container .searchbox input {
+    width: 15rem;
+  }
+
+  .navlink-container {
+    width: 100%;
+    justify-content: space-evenly;
+
+  }
+
+  .navlink-container ul li {
+    display: flex;
+    margin: 0;
+    font-size: 0.8 rem;
+    padding: 0;
+  }
+}
+
+@media (max-width : 1025px) {
+
+  .navlink-container {
+    width: 100%;
+  }
+
+  .navlink-container ul li {
+    display: flex;
+    margin: 0;
+    font-size: 0.8 rem;
+    padding: 0;
+  }
+}
+
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-item {
+  padding: 14px 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.nav-item:hover {
+  background-color: #575757;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 550;
+  font-size: 14px;
+  justify-content: center;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content .dropdown-item {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #575757;
+}
+
+.dropdowncategories ul {
+  width: auto;
+}
+
+.dropdowncategories ul li {
+  font-weight: 600;
+  list-style-type: none;
+}

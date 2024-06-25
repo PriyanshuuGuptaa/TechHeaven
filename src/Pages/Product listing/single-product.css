@@ -1,0 +1,127 @@
+.single-product-page {
+
+    margin: 2% 20%;
+    border: 2px solid rgb(163, 163, 163);
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 10px;
+    padding: 4%;
+    position: relative;
+}
+
+#exit-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    font-size: larger;
+    font-weight: 600;
+    background-color: transparent;
+    border: 0;
+}
+
+
+.single-product-container {
+    display: flex;
+    background-color: white;
+}
+
+.single-product-container .single-product-image {
+    border: 1px solid black;
+
+}
+
+.single-product-container .single-product-image img {
+    height: 300px;
+    width: 300px;
+}
+
+
+
+.single-product-container .single-product-details {
+    margin: 0 0 0 2%;
+    width: 50%;
+}
+
+.single-product-container .single-product-details .title {
+    border-bottom: 1px solid grey;
+    display: flex;
+    align-items: center;
+}
+
+#title {
+    font-size: xx-large;
+    font-weight: 500;
+    margin: 0 2% 3% 0;
+    text-transform: uppercase;
+}
+
+#rating {
+    margin: 0 0 3% 3%;
+    background-color: rgb(88, 158, 229);
+    color: white;
+    padding: 1%;
+    border-radius: 20%;
+}
+
+.single-product-container .single-product-details .price {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    padding: 3% 0 2% 0;
+
+}
+
+#actualPrice {
+    font-size: medium;
+    text-decoration: line-through;
+    margin: 0;
+    margin: 0 4% 0 0;
+
+
+}
+
+#discountedPrice {
+    font-size: xx-large;
+    margin: 0 4% 0 0;
+}
+
+#discount {
+    color: rgb(88, 158, 229);
+    font-weight: 500;
+}
+
+.single-product-container .single-product-details .description {
+    border-bottom: 1px solid grey;
+    padding: 3% 0 2% 0;
+
+
+}
+
+.single-product-container .single-product-details .description p {
+    margin: 3% 0;
+    font-size: larger;
+}
+
+.single-product-container .single-product-details .buttons {
+    padding: 3% 0 2% 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.single-product-container .single-product-details .buttons button {
+    padding: 7% 13%;
+    color: white;
+    background-color: rgb(88, 158, 229);
+    border: none;
+    font-size: medium;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.single-product-container .single-product-details .buttons button:hover {
+    background-color: rgb(111, 177, 244);
+
+}
+
+#exit-btn {
+    display: block;
+}

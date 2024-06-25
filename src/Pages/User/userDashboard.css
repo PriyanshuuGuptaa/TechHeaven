@@ -1,0 +1,45 @@
+.user-menu {
+    margin: 0 10%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.user-details {
+    margin: 0 10%;
+    border: 1px solid black;
+    padding: 5%;
+}
+
+.user-menu .user-menu-items {
+    padding: 10%;
+    margin: 5% 0;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.user-details {
+    margin: 0 20%;
+    border: 1px solid black;
+    border-radius: 1%;
+}
+
+.user-details h3 {
+    text-align: center;
+    padding: 0%;
+    margin: 5% 0;
+    width: 100%;
+}
+
+.profile-details {
+    margin: 0 20%;
+    border: 1px solid black;
+    border-radius: 1%;
+}
+
+.profile-details h3 {
+    text-align: center;
+    padding: 0%;
+    margin: 5% 0;
+    width: 100%;
+}

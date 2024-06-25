@@ -1,0 +1,171 @@
+.home-container .bestcollection {
+  margin: 3%;
+  padding: 55px 20px;
+  background-color: rgb(165, 210, 255);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.home-container .bestcollection .bestcollectiondetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container .bestcollection p {
+  font-size: 45px;
+  font-family: "DM Serif Display", serif;
+  font-family: "Vollkorn", serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+.home-container .bestcollection button {
+  font-weight: 600;
+  width: 150px;
+  padding: 12px 20px;
+  background-color: rgb(225, 232, 240);
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.home-container .bestcollection button:hover {
+  background-color: rgb(244, 246, 247);
+}
+
+.home-container .bestcollection .bestcollectionimg {
+  margin: 0 30px 0 0;
+}
+
+.producttype {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.producttype .type {
+  height: 180px;
+  width: 180px;
+  background-color: rgb(165, 210, 255);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 10px;
+}
+
+.producttype .type img {
+  height: auto;
+  width: 130px;
+  margin: 13%;
+  transition: 0.5s;
+}
+
+.producttype .type img:hover {
+  transform: scale(1.2);
+}
+
+.producttype .type p {
+  text-align: center;
+  font-family: "DM Serif Display", serif;
+}
+
+.producttype .type .link {
+  text-decoration: none;
+  color: black;
+}
+
+.home-container .services {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 50px;
+}
+
+.home-container .services .servicesinfo {
+  display: flex;
+  background-color: rgb(165, 210, 255);
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.home-container .services .servicesinfo .servicesinfoicon {
+  padding: 4px;
+  font-size: 28px;
+}
+
+.home-container .services .servicesinfo .servicesinfodetails p {
+  margin: 0;
+  color: white;
+}
+
+.home-container .services .servicesinfo .servicesinfodetails h3 {
+  margin: 0;
+  color: black;
+}
+
+.featuredproducts {
+  padding: 80px 100px;
+}
+
+.featuredproducts h3 {
+  font-size: xx-large;
+  font-family: "DM Serif Display", serif;
+  font-weight: 600;
+  margin: 10px;
+  color: black;
+}
+
+.featuredproducts .product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.home-container .banner {
+  margin: 0 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 60px 150px;
+  background-color: lightskyblue;
+  border-radius: 20px;
+}
+
+.home-container .banner .bannerinfo {
+  width: 600px;
+}
+
+.home-container .banner .bannerinfo h3 {
+  font-family: "DM Serif Display", serif;
+  font-size: xxx-large;
+  font-weight: 600;
+  margin: 0;
+  color: black;
+}
+
+.home-container .banner .bannerinfo p {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: large;
+  margin: 15px 0;
+  color: rgb(255, 255, 255);
+}
+
+.home-container .banner .bannerimage img {
+  width: 600px;
+  height: auto;
+}
+
+.home-container .banner .bannerbtn button {
+  width: 150px;
+  padding: 12px 20px;
+  background-color: rgb(225, 232, 240);
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.home-container .banner .bannerbtn button:hover {
+  background-color: rgb(244, 246, 247);
+}

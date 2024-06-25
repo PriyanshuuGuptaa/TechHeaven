@@ -1,0 +1,109 @@
+.card-container {
+  position: relative;
+  display: flex;
+  height: auto;
+  width: auto;
+  flex-direction: column;
+  border: 1px rgb(147, 145, 145) solid;
+  padding: 15px;
+  margin: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+  background-color: white;
+}
+
+.card-container:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 10px;
+}
+
+.card-img {
+  border-bottom: 1px rgb(147, 145, 145) solid;
+  display: flex;
+  justify-content: center;
+  padding: 5px 0 10px;
+}
+
+.card-img img {
+  width: 100%;
+  height: 200px;
+}
+
+.card-category p {
+  color: rgb(147, 145, 145);
+  margin: 0;
+}
+
+.card-title p {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 5px 0 0 0;
+  text-transform: uppercase;
+}
+
+.card-price {
+  display: flex;
+  margin: 5px 0 0 0;
+}
+
+.card-price p {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.card-price #discountedprice {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.card-price #actualprice {
+  margin: 0 10px;
+  font-size: 15px;
+  text-decoration: line-through;
+}
+
+.card-price #discount {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(88, 158, 229);
+}
+
+.btn {
+  width: 100%;
+  padding: 5px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.card-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-details .card-rating {
+  color: grey;
+}
+
+.card-details .card-rating .star {
+  color: grey;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: grey;
+  transition: color 0.3s ease;
+  position: absolute;
+  z-index: 1;
+  right: 3%;
+  top: 3%;
+}
+
+
+
+.like-button.liked {
+  color: red;
+}

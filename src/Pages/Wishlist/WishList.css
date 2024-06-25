@@ -1,0 +1,17 @@
+.wishlist-component-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10% 0 0;
+}
+
+.wishlist-component-container .remove-button button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.wishlist-component-container .remove-button button:hover {
+    color: grey;
+}

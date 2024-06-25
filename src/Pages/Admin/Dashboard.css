@@ -1,0 +1,128 @@
+.admin-dashboard-container {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 1% auto;
+    text-align: center;
+
+}
+
+.admin-menu {
+    margin: 0 10%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.admin-details {
+    border: 1px black solid;
+    margin: 2% 20%;
+    padding: 3% 0;
+    text-align: center;
+}
+
+.create-category-details {
+    border: 1px black solid;
+    margin: 2% 20%;
+    padding: 3% 0;
+}
+
+.create-category-details h3 {
+    text-align: center;
+    margin: 0;
+}
+
+.create-category-details .new-category form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-category-details .category-table table {
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.create-product-details {
+    border: 1px black solid;
+    margin: 2% 20%;
+    padding: 3% 0;
+
+}
+
+.create-product-details h3 {
+    text-align: center;
+    margin: 0;
+}
+
+.create-product-details .select-image {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-product-details .select-image input {
+    padding: 1%;
+    text-align: center;
+    width: auto;
+    background-color: transparent;
+}
+
+.create-product-details form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20%;
+}
+
+.create-product-details form input {
+    padding: 2%;
+    text-align: center;
+    margin: 1% 0;
+}
+
+.create-product-details form label {
+    padding: 2%;
+    text-align: center;
+}
+
+.create-product-details form button {
+    margin-top: 1%;
+    padding: 2%;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid rgba(25, 118, 210, 0.5);
+    color: #1976d2;
+}
+
+.all-products {
+    border: 1px black solid;
+    margin: 2% 20%;
+}
+
+.all-products h3 {
+    text-align: center;
+}
+
+.all-products-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    column-gap: 4%;
+    margin: 0 5% 2%;
+}
+
+.all-products-details .delete-btn {
+    margin: 0 4%;
+}
+
+.all-products-details .delete-btn button {
+    width: 100%;
+    padding: 2%;
+    cursor: pointer;
+    background-color: transparent;
+
+}
