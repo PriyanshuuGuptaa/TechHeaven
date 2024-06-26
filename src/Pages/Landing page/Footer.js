@@ -15,7 +15,6 @@ const Footer = () => {
         <div className="logoandname">
           <img src={logo} alt="logo"></img>
 
-          <h2>TechHeaven</h2>
         </div>
         <p>Made by PRIYANSHU GUPTA</p>
         <div className="contacticons">

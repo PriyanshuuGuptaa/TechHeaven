@@ -54,7 +54,7 @@ function App() {
       <Navbars state={state} dispatch={dispatch} />
       <Routs state={state} dispatch={dispatch} />
       <ToastContainer
-        position="top-center"
+        position="bottom-left"
         autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
@@ -63,7 +63,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored" // can be 'light', 'dark', or 'colored'
+        theme="light" // can be 'light', 'dark', or 'colored'
       // Add any default styles here
       />
       <Footer />

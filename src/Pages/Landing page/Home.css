@@ -1,36 +1,69 @@
+.home-container {
+  margin: 1% 0;
+  background-size: contain;
+
+}
+
 .home-container .bestcollection {
-  margin: 3%;
-  padding: 55px 20px;
-  background-color: rgb(165, 210, 255);
+  position: relative;
+  background-position: center;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.home-container .bestcollection .bestcollectiondetails {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.home-container .bestcollection img {
+  width: 100%;
+  height: auto;
 }
 
+.fade-in-top {
+  animation: fade-in-top 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes fade-in-top {
+  0% {
+    transform: translateY(-45px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 .home-container .bestcollection p {
-  font-size: 45px;
+  z-index: 1;
+  position: absolute;
+  top: 25%;
+  left: 42.5%;
+  font-size: 30px;
   font-family: "DM Serif Display", serif;
   font-family: "Vollkorn", serif;
   font-weight: 600;
   text-align: center;
 }
 
-.home-container .bestcollection button {
-  font-weight: 600;
-  width: 150px;
-  padding: 12px 20px;
-  background-color: rgb(225, 232, 240);
-  border: none;
-  cursor: pointer;
-  transition: 0.5s;
+.focus-in-expand {
+  animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s both;
 }
+
+@keyframes focus-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    filter: blur(12px);
+    opacity: 0;
+  }
+
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
 
 .home-container .bestcollection button:hover {
   background-color: rgb(244, 246, 247);
@@ -106,21 +139,23 @@
 }
 
 .featuredproducts {
-  padding: 80px 100px;
+  margin: 5% 0;
 }
 
 .featuredproducts h3 {
   font-size: xx-large;
-  font-family: "DM Serif Display", serif;
-  font-weight: 600;
-  margin: 10px;
+  font-family: "Kumbh Sans", sans-serif;
+  font-weight: 800;
+  margin: 4% 0;
   color: black;
+  text-align: center;
+
 }
 
 .featuredproducts .product {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .home-container .banner {

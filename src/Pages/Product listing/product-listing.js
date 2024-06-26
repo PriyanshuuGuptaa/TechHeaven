@@ -15,6 +15,8 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import "./product-listing.css";
 import { Link, useNavigate } from "react-router-dom";
+import Checkbox from '@mui/material/Checkbox';
+
 
 
 const ProductListing = ({ state, dispatch }) => {
@@ -25,6 +27,7 @@ const ProductListing = ({ state, dispatch }) => {
   const [maxPrice, setMaxPrice] = useState(200000);
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedDiscount, setSelectedDiscount] = useState(0);
+  const [isChecked, setisChecked] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -44,6 +47,7 @@ const ProductListing = ({ state, dispatch }) => {
     setSelectedCategory("");
     setSelectedRating(0);
     setPriceRange(70000);
+    setisChecked(false);
   }
 
   const filterByCategory = (e) => {
@@ -86,19 +90,16 @@ const ProductListing = ({ state, dispatch }) => {
           <FormLabel id="demo-radio-buttons-group-label" sx={{ color: "black" }}>
             <h3>Filter by Category</h3>
           </FormLabel>
-
           <FormControl>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue=""
-              name="radio-buttons-group"
-              onChange={filterByCategory}
-              value={selectedCategory}
-            >
-              {state.categories.map((category) => (
-                <FormControlLabel value={category.categoryName} control={<Radio />} label={`${category.categoryName}`} />
-              ))}
-            </RadioGroup>
+            {state.categories.map((category) => {
+              return (
+                < FormControlLabel
+                  control={
+                    <Checkbox value={category.categoryName} onClick={filterByCategory} />
+                  }
+                  label={category.categoryName}
+                />)
+            })}
           </FormControl>
 
         </div>
@@ -132,7 +133,7 @@ const ProductListing = ({ state, dispatch }) => {
               value={selectedRating}
             >
               {[4, 3, 2, 1].map((rating) => (
-                <FormControlLabel value={rating} control={<Radio />} label={`${rating} or above`} />
+                <FormControlLabel value={rating} control={<Checkbox />} label={`${rating} or above`} />
               ))}
             </RadioGroup>
           </FormControl>
@@ -150,7 +151,7 @@ const ProductListing = ({ state, dispatch }) => {
               onChange={filterByDiscount}
             >
               {[10, 20, 30, 40, 50].map((dis) => (
-                <FormControlLabel value={dis} control={<Radio />} label={`${dis}% or more`} />
+                <FormControlLabel value={dis} control={<Checkbox />} label={`${dis}% or more`} />
               ))}
             </RadioGroup>
           </FormControl>

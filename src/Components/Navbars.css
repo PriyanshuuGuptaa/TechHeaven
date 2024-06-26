@@ -1,16 +1,14 @@
 .navbar-container {
-  border-bottom: 1px solid black;
-  padding: 0 70px 0 150px;
+  padding: 10px 70px 0 150px;
+  background-color: transparent;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
 }
 
-.navbar-container ul {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  align-items: center;
-}
 
 .navbar-container ul li {
   list-style-type: none;
@@ -20,18 +18,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(20, 70, 121);
+  color: rgb(88, 158, 229);
+  text-decoration: none;
 }
 
-.navbar-container .logoandname Link {
+h2 {
   text-decoration: none;
-
-
 }
 
 .navbar-container img {
-  height: 55px;
+  height: 60px;
   width: auto;
+}
+
+
+.navbar-container .searchbox {
+  position: relative;
 }
 
 .navbar-container .searchbox form {
@@ -41,24 +43,26 @@
 
 }
 
-.navbar-container .searchbox form input {
-  width: 500px;
-
-}
-
 .navbar-container .searchbox form button {
-  width: 60px;
-  height: 31px;
+  position: absolute;
+  width: auto;
+  height: auto;
   text-align: center;
-  margin: 0;
+  background-color: transparent;
   border: 0;
+  right: 0;
+  color: rgb(88, 158, 229);
 }
 
 .navbar-container .searchbox input {
-  width: 40rem;
+  width: 150px;
   height: 31px;
-  border: rgb(88, 158, 229) solid 3px;
+  border: rgb(88, 158, 229) solid 2px;
   color: rgb(162, 160, 160);
+  border-radius: 25px;
+  padding: 0 0 0 15px;
+  background-color: transparent;
+
 }
 
 .navbar-container .searchbox button {
@@ -72,215 +76,56 @@
   text-align: center;
 }
 
-.navbar-container .usericons {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.navbar-container .icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
-.navbar-container ul li .link {
-  text-decoration: none;
-  color: black;
-}
-
 .navlink-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 50px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 10px;
-}
-
-.navlink-container ul {
-  padding: 0;
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  margin: 0 25%;
-
-}
-
-.navlink-container ul li {
-  font-weight: 600;
-  list-style-type: none;
-
-}
-
-.navlink-container ul li .link {
-  text-decoration: none;
-  color: black;
-  transition: 0.5s;
-}
-
-.navlink-container ul li .link:hover {
-  color: rgb(88, 158, 229);
-}
-
-.navlink-container .auth button {
-  cursor: pointer;
   background-color: transparent;
-  border: none;
-  font-size: medium;
 }
 
-/*RESPONSIVE USING MEDIA QUERY */
-
-@media (max-width : 426px) {
-
-
-  .navbar-container .logoandname h2 {
-    display: none;
-  }
-
-  .navbar-container .logoandname img {
-    height: 40px;
-    width: auto;
-  }
-
-  .navbar-container .searchbox input {
-    width: 10rem;
-  }
-
-  .navbar-container .usericons p {
-    display: none;
-  }
-
-  .navbar-container .icon p {
-    display: none;
-  }
-
-  .navlink-container {
-    width: 100%;
-  }
-
-  .navlink-container ul {
-    margin: 0 5%;
-  }
-
-  .navlink-container ul li {
-    display: flex;
-    margin: 0;
-    font-size: 0.8rem;
-    padding: 0;
-    align-items: center;
-
-  }
-
-}
-
-
-@media (max-width : 769px) {
-  .navbar-container .searchbox input {
-    width: 15rem;
-  }
-
-  .navlink-container {
-    width: 100%;
-    justify-content: space-evenly;
-
-  }
-
-  .navlink-container ul li {
-    display: flex;
-    margin: 0;
-    font-size: 0.8 rem;
-    padding: 0;
-  }
-}
-
-@media (max-width : 1025px) {
-
-  .navlink-container {
-    width: 100%;
-  }
-
-  .navlink-container ul li {
-    display: flex;
-    margin: 0;
-    font-size: 0.8 rem;
-    padding: 0;
-  }
-}
-
-.navbar {
-  background-color: #333;
-  overflow: hidden;
-}
-
-.navbar-nav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.userwishlistcart {
   display: flex;
+  gap: 30px;
 }
 
-.nav-item {
-  padding: 14px 20px;
-  cursor: pointer;
-  color: white;
-}
-
-.nav-item:hover {
-  background-color: #575757;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropbtn {
-  background-color: white;
-  border: none;
-  color: black;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  font-weight: 550;
-  font-size: 14px;
-  justify-content: center;
-}
-
-.dropdown-content {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  background-color: white;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content .dropdown-item {
-  color: black;
-  padding: 12px 16px;
+.userwishlistcart .link {
   text-decoration: none;
-  display: block;
+  color: black;
+  ;
 }
 
-.dropdown-content .dropdown-item:hover {
-  background-color: #f1f1f1;
+.searchbox
+/* styles.css */
+
+/* Hide the clear button in Chrome and Safari */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-
+/* Hide the clear button in Edge */
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
-.dropdown:hover .dropbtn {
-  background-color: #575757;
+/* Hide the clear button in Firefox (not natively supported) */
+input[type="search"] {
+  -moz-appearance: textfield;
+  /* Removes the clear button but changes input type to textfield */
 }
 
-.dropdowncategories ul {
-  width: auto;
+/* Additional styling to prevent UI quirks */
+input[type="search"] {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
 }
 
-.dropdowncategories ul li {
-  font-weight: 600;
-  list-style-type: none;
+#basic-button {
+  color: black;
 }
