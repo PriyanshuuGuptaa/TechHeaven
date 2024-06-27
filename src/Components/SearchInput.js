@@ -2,7 +2,8 @@ import React, { useReducer } from "react";
 import { useSearch } from "../Context/searchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ProductReducer from "../Reducers/productReducer";
+import SearchIcon from '@mui/icons-material/Search';
+
 const SearchInput = ({ state, dispatch }) => {
     const [values, setValues] = useSearch();
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const SearchInput = ({ state, dispatch }) => {
                     onChange={(e) => setValues({ ...values, keyword: e.target.value })}
                 />
                 <button className="btn btn-outline-success" type="submit">
-                    Search
+                    <SearchIcon />
                 </button>
             </form>
         </div>

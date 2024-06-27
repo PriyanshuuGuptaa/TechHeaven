@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 import bestcollection from "../../Assets/TechHaven images/bestcollection.png";
+import bgimg from "../../Assets/TechHaven images/background.jpg";
 import { Link } from "react-router-dom";
 import mobiletype from "../../Assets/TechHaven images/mobiletype.png";
 import laptoptype from "../../Assets/TechHaven images/laptoptype.png";
@@ -19,14 +20,35 @@ function Home({ state, dipatch }) {
     <div className="home-container">
 
       <div className="bestcollection">
-        <div className="bestcollectiondetails">
-          <p>The Best Collection Of Laptops 2023</p>
-          <Link to="/products" className="link">
-            <button className="bestcollectionbtn">Shop now</button>
-          </Link>
-        </div>
-        <div className="bestcollectionimg">
-          <img src={bestcollection} alt="img"></img>
+        <img src={bgimg} className="fade-in-top" />
+        {/* <p className="focus-in-expand">Best collection of <br />technical products </p> */}
+
+      </div>
+
+      <div className="featuredproducts">
+        <h3>TOP PRODUCTS</h3>
+        <div className="product">
+
+          {state.products.map((info) => {
+
+            return info.featuredProduct ? (
+              <div className="product-card-div">
+                <ProductCard
+                  key={info._id}
+                  id={info._id}
+                  img={`http://localhost:8080/api/v1/products/product-photo/${info._id}`}
+                  category={info.category}
+                  title={info.title}
+                  price={info.price}
+                  discount={info.discount}
+                  rating={info.rating}
+                  discountedPrice={(info.price - (((info.price) * (10)) / 100))}
+                />
+              </div>
+            ) : (
+              ""
+            );
+          })}
         </div>
       </div>
 
@@ -95,32 +117,6 @@ function Home({ state, dipatch }) {
         </div>
       </div>
 
-      <div className="featuredproducts">
-        <h3>TOP PRODUCTS</h3>
-        <div className="product">
-
-          {state.products.map((info) => {
-
-            return info.featuredProduct ? (
-              <div className="product-card-div">
-                <ProductCard
-                  key={info._id}
-                  id={info._id}
-                  img={`http://localhost:8080/api/v1/products/product-photo/${info._id}`}
-                  category={info.category}
-                  title={info.title}
-                  price={info.price}
-                  discount={info.discount}
-                  rating={info.rating}
-                  discountedPrice={(info.price - (((info.price) * (10)) / 100))}
-                />
-              </div>
-            ) : (
-              ""
-            );
-          })}
-        </div>
-      </div>
 
 
 
