@@ -22,7 +22,8 @@ const ProductReducer = (state, action) => {
     case "SET_CATEGORY": {
       return {
         ...state,
-        filteredProducts: action.payload,
+        filteredByCategory: action.payload,
+        filteredProducts: action.payload
       }
     }
     case "SET_PRICE": {
@@ -43,7 +44,7 @@ const ProductReducer = (state, action) => {
         filteredProducts: action.payload,
       };
     }
- 
+
     case "SEARCH_PRODUCTS": {
       return {
         ...state,

@@ -10,6 +10,7 @@ const initialstate = {
   products: [],
   categories: [],
   filteredProducts: [],
+  filteredByCategory: [],
   cartQty: 0,
   totalprice: 0,
   totaldiscount: 0
@@ -64,6 +65,7 @@ function App() {
         draggable
         pauseOnHover
         theme="light" // can be 'light', 'dark', or 'colored'
+
       // Add any default styles here
       />
       <Footer />

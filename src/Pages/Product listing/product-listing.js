@@ -28,6 +28,8 @@ const ProductListing = ({ state, dispatch }) => {
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedDiscount, setSelectedDiscount] = useState(0);
   const [isChecked, setisChecked] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -51,34 +53,81 @@ const ProductListing = ({ state, dispatch }) => {
   }
 
   const filterByCategory = (e) => {
-    const category = e.target.value;
-    const filteredProducts = state.products.filter(product => product.category === category);
-    dispatch({ type: "SET_CATEGORY", payload: filteredProducts });
+    const category = e;
+    const filteredByCategory = state.products.filter(product => product.category === category);
+    dispatch({ type: "SET_CATEGORY", payload: filteredByCategory });
     setSelectedCategory(category);
   };
   const filterByPrice = (event, newValue) => {
     setPriceRange(newValue);
-    const filteredProducts = state.products.filter(product => product.price <= newValue);
-    dispatch({ type: "SET_PRICE", payload: filteredProducts })
+    const filteredByCategory = state.filteredByCategory.filter(product => product.price <= newValue);
+    dispatch({ type: "SET_PRICE", payload: filteredByCategory })
   };
 
-  const filterByRating = (e) => {
-    const rating = e.target.value; setSelectedRating(rating);
-    const filteredProducts = state.products.filter(product => product.rating >= rating);
-    dispatch({ type: "SET_RATING", payload: filteredProducts });
+
+
+  const toggleRatingFilter = (rating) => {
+    console.log(rating, selectedRating)
+    if (selectedRating === rating) {
+      console.log(state.filteredProducts)
+      dispatch({ type: "SET_RATING", payload: state.filteredByCategory }); // Reset rating filter
+      setSelectedRating(0);
+    } else {
+      const filteredProducts = state.filteredByCategory.filter(product => product.rating >= rating);
+      dispatch({ type: "SET_RATING", payload: filteredProducts });
+      setSelectedRating(rating);
+    }
   };
 
-  const filterByDiscount = (e) => {
-    const discount = e.target.value;
-    setSelectedDiscount(discount);
-    const filteredProducts = state.products.filter(product => product.discount >= discount);
-    dispatch({ type: "SET_DISCOUNT", payload: filteredProducts })
+  const toggleDiscountFilter = (discount) => {
+    if (selectedDiscount === discount) {
+      dispatch({ type: "SET_DISCOUNT", payload: state.filteredByCategory }); // Reset discount filter
+      setSelectedDiscount(0);
+    } else {
+      const filteredByCategory = state.filteredByCategory.filter(product => product.discount >= discount);
+      dispatch({ type: "SET_DISCOUNT", payload: filteredByCategory });
+      setSelectedDiscount(discount);
+    }
   }
+  const handlePrevious = () => {
+    console.log(currentIndex)
+    if (currentIndex >= 1) {
+
+      setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : state.categories.length - 1));
+    }
+
+
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex < state.categories.length - 1 ? prevIndex + 1 : 0));
+  };
 
 
 
   return (
+
     <div className="product-listing-container">
+      <div className="carousel-container">
+        <button className="carousel-button left" onClick={handlePrevious}>&#8249;</button>
+        <div className="carousel-wrapper">
+          <div
+            className="carousel-inner"
+            style={{
+              transform: `translateX(${-currentIndex * 100}%)`,
+              gridTemplateColumns: `repeat(${state.categories.length}, 1fr)`
+            }}
+          >
+            {state.categories.map((category, index) => (
+              <div key={index} className="carousel-item">
+                {/* <img src={`/${category.categoryName}.jpg`} alt={category.categoryName} className="carousel-image" /> */}
+                <h3 className="carousel-title" onClick={() => { filterByCategory(category.categoryName) }}>{category.categoryName}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+        <button className="carousel-button right" onClick={handleNext}>&#8250;</button>
+      </div>
       <div className="filters">
         <div className="filter-heading">
           <h2>Filters</h2>
@@ -86,23 +135,7 @@ const ProductListing = ({ state, dispatch }) => {
             <Button variant="text" size="small" onClick={clearAllFilters} >Clear All</Button>
           </Stack>
         </div>
-        <div className="filter-by-category">
-          <FormLabel id="demo-radio-buttons-group-label" sx={{ color: "black" }}>
-            <h3>Filter by Category</h3>
-          </FormLabel>
-          <FormControl>
-            {state.categories.map((category) => {
-              return (
-                < FormControlLabel
-                  control={
-                    <Checkbox value={category.categoryName} onClick={filterByCategory} />
-                  }
-                  label={category.categoryName}
-                />)
-            })}
-          </FormControl>
 
-        </div>
         <div className="filter-by-price">
           <h3>Filter by Price</h3>
           <Box sx={{ width: 300 }}>
@@ -120,22 +153,15 @@ const ProductListing = ({ state, dispatch }) => {
           </Box>
         </div>
         <div className="filter-by-rating">
-          <FormLabel id="demo-radio-buttons-group-label" sx={{ color: "black" }}>
+          <FormLabel sx={{ color: "black" }}>
             <h3>Filter by Ratings</h3>
           </FormLabel>
 
           <FormControl>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue={0}
-              name="radio-buttons-group"
-              onChange={filterByRating}
-              value={selectedRating}
-            >
-              {[4, 3, 2, 1].map((rating) => (
-                <FormControlLabel value={rating} control={<Checkbox />} label={`${rating} or above`} />
-              ))}
-            </RadioGroup>
+
+            {[4, 3, 2, 1].map((rating) => (
+              <FormControlLabel value={rating} control={<Checkbox checked={selectedRating === rating} onChange={() => toggleRatingFilter(rating)} />} label={`${rating} or above`} />
+            ))}
           </FormControl>
         </div>
         <div className="filter-by-discount">
@@ -148,10 +174,10 @@ const ProductListing = ({ state, dispatch }) => {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue=""
               name="radio-buttons-group"
-              onChange={filterByDiscount}
+
             >
               {[10, 20, 30, 40, 50].map((dis) => (
-                <FormControlLabel value={dis} control={<Checkbox />} label={`${dis}% or more`} />
+                <FormControlLabel value={dis} control={<Checkbox checked={selectedDiscount === dis} onChange={() => toggleDiscountFilter(dis)} />} label={`${dis}% or more`} />
               ))}
             </RadioGroup>
           </FormControl>

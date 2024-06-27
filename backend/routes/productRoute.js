@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post("/create-product", requiresSignIn, isAdmin, formidable(), ProductController);
 router.delete("/delete-product/:pid", requiresSignIn, isAdmin, deleteProductController);
-router.get("/all-products", allProducts, productPhotoController);
+router.get("/all-products", allProducts, allProducts);
 router.get("/single-product/:pid", singleProductController);
 router.get("/product-photo/:pid", productPhotoController);
 router.put("/update-product/:id", UpdateProductController);
