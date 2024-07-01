@@ -16,6 +16,7 @@ import Button from '@mui/material/Button';
 import "./product-listing.css";
 import { Link, useNavigate } from "react-router-dom";
 import Checkbox from '@mui/material/Checkbox';
+import SkeletonProductCard from "../../Components/SkeletonLoaderCard";
 
 
 
@@ -29,6 +30,7 @@ const ProductListing = ({ state, dispatch }) => {
   const [selectedDiscount, setSelectedDiscount] = useState(0);
   const [isChecked, setisChecked] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
 
   const navigate = useNavigate();
@@ -42,6 +44,7 @@ const ProductListing = ({ state, dispatch }) => {
       setMinPrice(min);
       setMaxPrice(max);
       setPriceRange(70000); // Initialize the slider to max price
+      setLoading(false);
     }
 
   }, [state.products]);
@@ -187,7 +190,9 @@ const ProductListing = ({ state, dispatch }) => {
         </div>
       </div>
       <div className="products" >
-        {state.filteredProducts.map((product) =>
+        {loading ? ((Array.from({ length: 6 }).map((_, index) => (
+          <SkeletonProductCard key={index} />
+        )))) : (state.filteredProducts.map((product) =>
           <div className="product-card-div"  >
             <div>
 
@@ -205,10 +210,10 @@ const ProductListing = ({ state, dispatch }) => {
               />
             </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
-  );
+  )
 };
 
 export default ProductListing;
