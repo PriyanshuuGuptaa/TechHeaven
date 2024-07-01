@@ -43,7 +43,9 @@ const ProductListing = ({ state, dispatch }) => {
       setMaxPrice(max);
       setPriceRange(70000); // Initialize the slider to max price
     }
+
   }, [state.products]);
+
   const clearAllFilters = () => {
     dispatch({ type: "CLEAR_ALL_FILTERS", payload: state.products });
     setSelectedCategory("");

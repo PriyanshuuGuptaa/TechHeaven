@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { FaRegUser } from "react-icons/fa";
 import Badge from '@mui/material/Badge';
 import { useAuth } from "../Context/authContext";
 import { toast } from "react-toastify";
@@ -60,7 +59,9 @@ function Navbars({ searchbtn, state, dispatch }) {
         </Link>
 
         <Link to="/products" className="link">
-          <Button id="basic-button">
+          <Button id="basic-button" onClick={() => {
+            dispatch({ type: "CLEAR_ALL_FILTERS", payload: state.products });
+          }}>
             Products
           </Button>
         </Link>
@@ -102,7 +103,7 @@ function Navbars({ searchbtn, state, dispatch }) {
             >
               <MenuItem onClick={handleClose}>
                 <Link to={`/dashboard/${auth?.user?.role === "admin" ? "admin" : "user"}`} >
-                  <Button id="basic-button">
+                  <Button id="basic-button" onClick={() => { console.log(auth.user.role) }}>
                     Dashboard
                   </Button></Link>
               </MenuItem>

@@ -51,6 +51,7 @@ const ProductReducer = (state, action) => {
         filteredProducts: action.payload
       }
     }
+
     default: {
       return {
       }

@@ -21,6 +21,7 @@ const UpdateProduct = () => {
     const [quantity, setQuantity] = useState("");
     const [rating, setRating] = useState("");
     const [shipping, setShipping] = useState(false);
+    const [featuredProduct, setFeaturedProduct] = useState(false);
 
     const navigate = useNavigate();
     const StyledMenu = styled((props) => (
@@ -101,39 +102,40 @@ const UpdateProduct = () => {
     }, [id])
 
 
-    // const createProductHandler = async (e) => {
-    //     e.preventDefault();
-    //     console.log(e)
-    //     const formData = new FormData();
-    //     formData.append('title', title);
-    //     formData.append('description', description);
-    //     formData.append('price', price);
-    //     formData.append('quantity', quantity);
-    //     formData.append('image', image);
-    //     formData.append('category', selectedCategoryName);
-    //     formData.append('shipping', shipping);
-    //     formData.append('rating', rating);
-    //     console.log(description, price, quantity, image, selectedCategory, shipping, rating)
-    //     try {
-    //         const { data } = await axios.post(
-    //             `http://localhost:8080/api/v1/products/update-product/${e.id}`,
-    //             formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data'
-    //             }
-    //         });
-    //         if (data?.success) {
-    //             toast.success("Product Created Successfully");
-    //             navigate("/dashboard/admin/create-product");
-    //         } else {
-    //             toast.error(data?.message);
-    //         }
-    //     } catch (error) {
-    //         console.error("Error creating product:", error.response ? error.response.data : error.message);
-    //         console.log(error)
-    //         toast.error("Error in creating product");
-    //     }
-    // };
+    const createProductHandler = async (e) => {
+        e.preventDefault();
+        console.log(e)
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('quantity', quantity);
+        formData.append('image', image);
+        formData.append('category', selectedCategoryName);
+        formData.append('shipping', shipping);
+        formData.append('rating', rating);
+        formData.append('featuredProduct', featuredProduct);
+        console.log(description, price, quantity, image, selectedCategory, shipping, rating, featuredProduct)
+        try {
+            const { data } = await axios.post(
+                `http://localhost:8080/api/v1/products/update-product/${e.id}`,
+                formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            if (data?.success) {
+                toast.success("Product Created Successfully");
+                navigate("/dashboard/admin/create-product");
+            } else {
+                toast.error(data?.message);
+            }
+        } catch (error) {
+            console.error("Error creating product:", error.response ? error.response.data : error.message);
+            console.log(error)
+            toast.error("Error in creating product");
+        }
+    };
 
     return (
         <div>

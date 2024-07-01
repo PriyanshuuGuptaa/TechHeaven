@@ -36,7 +36,7 @@ const SearchInput = ({ state, dispatch }) => {
                     value={values.keyword}
                     onChange={(e) => setValues({ ...values, keyword: e.target.value })}
                 />
-                <button className="btn btn-outline-success" type="submit">
+                <button className="btn btn-outline-success" type="submit" >
                     <SearchIcon />
                 </button>
             </form>

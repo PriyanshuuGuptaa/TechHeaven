@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import "./Dashboard.css";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ProductCard from '../../Components/ProductCard';
 import { Button, ButtonGroup } from '@mui/material';
 const AllProducts = () => {
+    const navigate = useNavigate();
     const buttons = [
         <Button key="one" sx={{ borderColor: 'black' }}>
             <Link to="/dashboard/admin/create-category" style={{ textDecoration: "none", color: 'black' }} >Create Category</Link>
@@ -59,6 +60,10 @@ const AllProducts = () => {
         }
     }
 
+    //update product
+    const updateProductHandler = (id) => {
+        navigate("/dashboard/admin/update-product/:id");
+    }
 
 
     useEffect(() => {
@@ -96,6 +101,9 @@ const AllProducts = () => {
                                 />
                                 <div className='delete-btn'>
                                     <button onClick={() => { deleteProductHandler(product._id) }} >Delete</button>
+                                </div>
+                                <div className='update-btn'>
+                                    <button onClick={() => { updateProductHandler(product._id) }}>Update</button>
                                 </div>
                             </div>
                         ))}

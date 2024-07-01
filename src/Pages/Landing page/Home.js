@@ -16,8 +16,10 @@ import bannerimage from "../../Assets/TechHaven images/bannerimage.png";
 import { useAuth } from "../../Context/authContext";
 function Home({ state, dipatch }) {
   const [auth, setAuth] = useAuth();
+
   return (
     <div className="home-container">
+
 
       <div className="bestcollection">
         <img src={bgimg} className="fade-in-top" />
