@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../Components/ProductCard";
-import { IoCartOutline } from "react-icons/io5";
-import { FaHeart, FaRegEye, FaRegHeart } from "react-icons/fa";
-import axios from "axios";
-import { toast } from "react-toastify";
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
@@ -14,7 +9,7 @@ import FormLabel from '@mui/material/FormLabel';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import "./product-listing.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Checkbox from '@mui/material/Checkbox';
 import SkeletonProductCard from "../../Components/SkeletonLoaderCard";
 
@@ -72,7 +67,6 @@ const ProductListing = ({ state, dispatch }) => {
 
 
   const toggleRatingFilter = (rating) => {
-    console.log(rating, selectedRating)
     if (selectedRating === rating) {
       console.log(state.filteredProducts)
       dispatch({ type: "SET_RATING", payload: state.filteredByCategory }); // Reset rating filter

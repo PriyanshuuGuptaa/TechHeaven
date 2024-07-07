@@ -5,6 +5,8 @@
     padding: 1% 2%;
     height: auto;
     gap: 10px;
+    position: relative;
+    top: 80px;
 }
 
 .product-listing-container .carousel-container {
@@ -14,15 +16,20 @@
     height: 9vh;
 }
 
+.product-listing-container .carousel-wrapper {
+    margin: 0 10%;
+}
+
 .product-listing-container .products {
     padding: 0 2%;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 20px;
-    justify-content: flex-start;
+    gap: 10px 40px;
+    justify-content: space-evenly;
     align-content: flex-start;
     height: auto;
     overflow-y: auto;
+
 }
 
 .product-listing-container .filters {

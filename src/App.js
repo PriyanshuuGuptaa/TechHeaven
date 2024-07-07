@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from "react";
 import Navbars from "./Components/Navabars";
 import Routs from "./Routs";
-import Footer from "./Pages/Landing page/Footer";
+import Footer from "./Components/Footer.js";
 import ProductReducer from "./Reducers/productReducer";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,10 +35,7 @@ function App() {
   const getAllProducts = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/v1/products/all-products");
-
       dispatch({ type: 'ALL_PRODUCTS', payload: response.data.allProducts });
-
-
 
     } catch (error) {
       toast.error("Failed to fetch all products");
@@ -65,8 +62,6 @@ function App() {
         draggable
         pauseOnHover
         theme="light" // can be 'light', 'dark', or 'colored'
-
-      // Add any default styles here
       />
       <Footer />
     </div>

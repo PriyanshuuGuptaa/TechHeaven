@@ -1,4 +1,4 @@
-import logo from "../Assets/TechHaven images/logo.png";
+import logo from "../Assets/logo.png";
 import "./Navbars.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -11,12 +11,13 @@ import { toast } from "react-toastify";
 import { useCart } from "../Context/cartContext";
 import { useWishList } from "../Context/wishListContext";
 import SearchInput from "./SearchInput";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { Button } from "@mui/material";
+import { motion } from "framer-motion"
 
 
-function Navbars({ searchbtn, state, dispatch }) {
+
+
+
+function Navbars({ state, dispatch }) {
   const [auth, setAuth] = useAuth();
   const [cart] = useCart();
   const [wishList] = useWishList();
@@ -34,113 +35,264 @@ function Navbars({ searchbtn, state, dispatch }) {
     toast.success("Logout successful");
   }
   const name = localStorage.getItem("name");
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+
+  const hideNavItemsVariant = {
+    opened: {
+      opacity: 0,
+      y: "-100%",
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut"
+      }
+    },
+    closed: {
+      opacity: 1,
+      y: "0%",
+      transition: {
+        delay: 1.1,
+        duration: 0.5,
+        ease: "easeInOut"
+      }
+    }
+  }
+
+  const mobileMenuVariant = {
+    opened: {
+      y: "0%",
+      transition: {
+        delay: 0.15,
+        duration: 1.1,
+        ease: [0.74, 0, 0.19, 1.02]
+      }
+    },
+    closed: {
+      y: "-100%",
+      transition: {
+        delay: 0.35,
+        duration: 0.63,
+        ease: [0.74, 0, 0.19, 1.02]
+      }
+    }
+  }
+
+  const fadeInVariant = {
+    opened: {
+      opacity: 1,
+      transition: {
+        delay: 1.2
+      }
+    },
+    closed: { opacity: 0 }
+  }
+
+  const ulVariant = {
+    opened: {
+      transition: {
+        delayChildren: 1,
+        staggerChildren: 0.18
+      }
+    },
+    closed: {
+      transition: {
+        staggerChildren: 0.06,
+        staggerDirection: -1
+      }
+    }
+  }
+
+  const liVariant = {
+    opened: {
+      opacity: 1,
+      y: "0%",
+      transition: {
+        duration: 0.65,
+        ease: "easeOut"
+      }
+    },
+    closed: {
+      opacity: 0,
+      y: "100%",
+      transition: {
+        duration: 0.25,
+        ease: "easeInOut"
+      }
+    }
+  }
+
+  const fadeInStart = { opacity: 0 }
+  const fadeInEnd = { opacity: 1 }
+  const fadeInTransition = { duration: 1 }
+
+
   return (
     <div className="navbar-container">
+      <div className="nav-menu">
+        <motion.nav
+          initial="closed"
+          animate={mobileNavOpen ? "opened" : "closed"}
+        >
+
+          <div className="menu-container">
+            <motion.div
+              variants={hideNavItemsVariant}
+              onClick={() => setMobileNavOpen(true)}
+            >
+              <p> Menu </p>
+            </motion.div>
+          </div>
+          <motion.div variants={mobileMenuVariant} className="mobile-menu">
+            <motion.button
+              variants={fadeInVariant}
+              onClick={() => setMobileNavOpen(false)}
+              id="close-btn"
+            >
+              X
+            </motion.button>
+            <motion.ul variants={ulVariant}>
+              <motion.li whileTap={{ scale: 0.95 }} >
+                <motion.div variants={liVariant}>
+                  <Link to="/" className="link">
+                    <button onClick={() => setMobileNavOpen(false)} >
+                      Home
+                    </button>
+                  </Link>
+                </motion.div>
+              </motion.li>
+              <motion.li whileTap={{ scale: 0.95 }}>
+                <motion.div variants={liVariant}>
+                  <Link to="/products" className="link">
+                    <button onClick={() => {
+                      dispatch({ type: "CLEAR_ALL_FILTERS", payload: state.products });
+                      setMobileNavOpen(false)
+                    }}>
+                      Products
+                    </button>
+                  </Link>
+                </motion.div>
+              </motion.li>
+
+              {!auth.user ? (
+                <>
+                  <motion.li whileTap={{ scale: 0.95 }}>
+
+                    <motion.div variants={liVariant}>
+                      <Link to="/register">
+                        <button onClick={() => { setMobileNavOpen(false) }
+                        }>
+                          Register
+                        </button>
+                      </Link>
+                    </motion.div>
+                  </motion.li>
+
+                  <motion.li whileTap={{ scale: 0.95 }}>
+                    <motion.div variants={liVariant}>
+                      <Link to="/login">
+                        <button onClick={() => {
+                          setMobileNavOpen(false)
+                        }}>
+                          Login
+                        </button>
+                      </Link>
+                    </motion.div>
+                  </motion.li>
+                </>
+              ) : (<>
+                <motion.li whileTap={{ scale: 0.95 }}>
+                  <motion.div variants={liVariant}>
+                    <Link to="/Cart">
+                      <button onClick={() => {
+                        setMobileNavOpen(false);
+                      }}>
+                        Cart
+                      </button>
+                    </Link>
+                  </motion.div>
+                </motion.li>
+                <motion.li whileTap={{ scale: 0.95 }}>
+                  <motion.div variants={liVariant}>
+                    <Link to="/Wishlist">
+                      <button onClick={() => {
+                        setMobileNavOpen(false);
+                      }}>
+                        Wishlist
+                      </button>
+                    </Link>
+                  </motion.div>
+                </motion.li>
+                <motion.li whileTap={{ scale: 0.95 }}>
+                  <motion.div variants={liVariant}>
+                    <Link to={`/dashboard/${auth?.user?.role === "admin" ? "admin" : "user"}`} >
+                      <button onClick={() => {
+                        setMobileNavOpen(false)
+                      }}>
+                        Dashboard
+                      </button>
+                    </Link>
+                  </motion.div>
+                </motion.li>
+
+                <motion.li whileTap={{ scale: 0.95 }}>
+                  <motion.div variants={liVariant}>
+                    <Link to="/">
+                      <button onClick={() => {
+                        setMobileNavOpen(false);
+                        handleLogOut();
+                      }}>
+                        Logout
+                      </button>
+                    </Link>
+                  </motion.div>
+                </motion.li>
+              </>
+              )}
+
+            </motion.ul>
+          </motion.div>
+        </motion.nav>
+
+        <motion.div
+          initial={fadeInStart}
+          animate={fadeInEnd}
+          transition={fadeInTransition}
+          className="img-container"
+        >
+        </motion.div>
+      </div>
       <div className="logo">
         <Link to="/" className="link">
           <img src={logo} alt="logo"></img>
+
         </Link>
       </div>
 
-      <div className="navlink-container">
 
-        <Link to="/" className="link">
-          <Button id="basic-button">
-            Home
-          </Button>
-        </Link>
-
-        <Link to="/products" className="link">
-          <Button id="basic-button" onClick={() => {
-            dispatch({ type: "CLEAR_ALL_FILTERS", payload: state.products });
-          }}>
-            Products
-          </Button>
-        </Link>
-
-        {!auth.user ? (
-          <>
-            <Link to="/register">
-              <Button id="basic-button">
-                Register
-              </Button>
-            </Link>
-            <Link to="/login">
-              <Button id="basic-button">
-                Login
-              </Button>
-            </Link>
-          </>
-        ) : (
-
-          <div className="dropdowncategories">
-
-            <Button
-              id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
-            >
-              Dashboard
-            </Button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-            >
-              <MenuItem onClick={handleClose}>
-                <Link to={`/dashboard/${auth?.user?.role === "admin" ? "admin" : "user"}`} >
-                  <Button id="basic-button" onClick={() => { console.log(auth.user.role) }}>
-                    Dashboard
-                  </Button></Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}><Link to="/" onClick={handleLogOut}>
-                <Button id="basic-button">
-                  Logout
-                </Button>
-              </Link></MenuItem>
-            </Menu>
-          </div>
-
-        )}
-      </div>
-
-
-      <div className="searchbox">
-        <SearchInput state={state} dispatch={dispatch} />
-      </div>
 
       <div className="userwishlistcart">
-        <Link to="/Dashboard" className="link usericons">
-          <p> <PersonOutlineOutlinedIcon sx={{ height: 24 }} /></p>
-        </Link>
+        <div>
+          <SearchInput state={state} dispatch={dispatch} />
+        </div>
 
-        <Link to="/WishList" className="link icon">
-          <Badge badgeContent={wishList?.length} color="primary" sx={{ margin: 0 }}>
-            <p><FavoriteBorderOutlinedIcon sx={{ height: 22 }} /></p>
-          </Badge>
-
-        </Link>
-        <Link to="/Cart" className="link icon">
-          <Badge badgeContent={cart?.length} color="primary" sx={{ margin: 0 }}>
-            <p> <ShoppingCartOutlinedIcon sx={{ height: 20 }} /></p>
-          </Badge>
-        </Link>
+        <div className="icon">
+          <Link to="/WishList" >
+            <Badge badgeContent={wishList?.length} color="white" sx={{ margin: 0 }}>
+              <p><FavoriteBorderOutlinedIcon className="i" sx={{ height: 20, color: "black" }} /></p>
+            </Badge>
+          </Link>
+        </div>
+        <div className="icon">
+          <Link to="/Cart" >
+            <Badge badgeContent={cart?.length} color="white" sx={{ margin: 0, zIndex: 2 }}>
+              <p> <ShoppingCartOutlinedIcon className="i" sx={{ height: 20, color: "black" }} /></p>
+            </Badge>
+          </Link>
+        </div>
 
       </div>
+
     </div >
   );
 }

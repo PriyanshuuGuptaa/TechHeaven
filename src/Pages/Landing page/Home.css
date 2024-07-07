@@ -1,205 +1,291 @@
 .home-container {
-  margin: 1% 0;
-  background-size: contain;
-
+  position: relative;
+  z-index: 1;
+  font-family: Inter, sans-serif;
 }
 
-.home-container .bestcollection {
-  position: relative;
-  background-position: center;
-  background-size: cover;
+.home-container .banner1 {
   display: flex;
   align-items: center;
+  gap: 0;
   justify-content: space-evenly;
-}
-
-.home-container .bestcollection img {
   width: 100%;
-  height: auto;
 }
 
-.fade-in-top {
-  animation: fade-in-top 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+.top-catergories-section {
+  margin: 3% 0;
 }
 
-@keyframes fade-in-top {
-  0% {
-    transform: translateY(-45px);
-    opacity: 0;
+.tc-heading {
+  text-align: center;
+  margin: 0;
+}
+
+.tc-heading p {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.top-categories {
+
+  max-width: 1200px;
+  margin: 5% 8%;
+  display: grid;
+  gap: 2rem;
+
+}
+
+.top-category-cards img {
+  background-color: #F3F3F3;
+  border-radius: 25px;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 600px) {
+  .top-categories {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  100% {
-    transform: translateY(0);
-    opacity: 1;
+@media (min-width: 900px) {
+  .top-categories {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-
-.home-container .bestcollection p {
-  z-index: 1;
-  position: absolute;
-  top: 25%;
-  left: 42.5%;
-  font-size: 30px;
-  font-family: "DM Serif Display", serif;
-  font-family: "Vollkorn", serif;
+#fp-heading {
+  font-family: "Inter", sans-serif;
+  margin: 4% 0;
+  font-size: 35px;
   font-weight: 600;
   text-align: center;
 }
 
-.focus-in-expand {
-  animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s both;
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@keyframes focus-in-expand {
-  0% {
-    letter-spacing: -0.5em;
-    filter: blur(12px);
-    opacity: 0;
-  }
+.featured-product-card {
+  width: 25rem !important;
+  margin: 0 5rem !important;
+  transition: transform 500ms ease;
 
-  100% {
-    filter: blur(0px);
-    opacity: 1;
-  }
+
 }
 
-
-.home-container .bestcollection button:hover {
-  background-color: rgb(244, 246, 247);
+.featured-product-card:hover,
+.featured-product-card:focus-within {
+  transform: scale(1.05);
 }
 
-.home-container .bestcollection .bestcollectionimg {
-  margin: 0 30px 0 0;
+.featured-product-card img {
+  width: 100%;
+  position: relative;
 }
 
-.producttype {
-  padding: 30px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.producttype .type {
-  height: 180px;
-  width: 180px;
-  background-color: rgb(165, 210, 255);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 10px;
-}
-
-.producttype .type img {
-  height: auto;
-  width: 130px;
-  margin: 13%;
-  transition: 0.5s;
-}
-
-.producttype .type img:hover {
-  transform: scale(1.2);
-}
-
-.producttype .type p {
-  text-align: center;
-  font-family: "DM Serif Display", serif;
-}
-
-.producttype .type .link {
-  text-decoration: none;
-  color: black;
-}
-
-.home-container .services {
-  display: flex;
-  justify-content: space-evenly;
-  padding: 50px;
-}
-
-.home-container .services .servicesinfo {
-  display: flex;
-  background-color: rgb(165, 210, 255);
-  padding: 30px;
-  border-radius: 20px;
-}
-
-.home-container .services .servicesinfo .servicesinfoicon {
-  padding: 4px;
-  font-size: 28px;
-}
-
-.home-container .services .servicesinfo .servicesinfodetails p {
-  margin: 0;
+.featured-product-card-content {
+  width: 25rem;
+  position: absolute;
+  bottom: 0px;
+  --padding: 1.5rem;
+  padding: var(--padding);
+  background: linear-gradient(hsl(0 0% 0% / 0),
+      hsl(20 0% 10% / 0.3) 20%,
+      hsl(0 0% 0% / 1));
   color: white;
 }
 
-.home-container .services .servicesinfo .servicesinfodetails h3 {
-  margin: 0;
-  color: black;
+.card-title {
+  position: relative;
+  width: max-content;
+  font-size: 40px;
 }
 
-.featuredproducts {
-  margin: 5% 0;
+.featured-product-card:hover .card-title::after,
+.featured-product-card:focus-within .card-title::after {
+  transform: scaleX(1);
 }
 
-.featuredproducts h3 {
-  font-size: xx-large;
-  font-family: "Kumbh Sans", sans-serif;
-  font-weight: 800;
-  margin: 4% 0;
+.card-title::after {
+  position: absolute;
+  height: 4px;
+  left: calc(var(--padding) * -1);
+  bottom: -2px;
+  background: var(--clr-accent-400);
+  transform-origin: left;
+  transition: transform 500ms ease;
+}
+
+.prices {
+  display: flex;
+  gap: 10px;
+  margin: 2% 0;
+  align-items: center;
+}
+
+.card-mrp {
+  text-decoration: line-through;
+  color: lightgray;
+}
+
+.card-price {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.card-discount {
+  width: fit-content;
+  padding: 5px;
+  border-radius: 25px;
   color: black;
+  background-color: lightgray;
+}
+
+@media (hover) {
+  .featured-product-card-content {
+    transform: translateY(35%);
+    transition: transform 500ms ease;
+  }
+
+  .featured-product-card-content>*:not(.card-title) {
+    opacity: 0;
+    transition: opacity 500ms linear;
+  }
+
+  .featured-product-card:hover .featured-product-card-content>*:not(.card-title),
+  .featured-product-card:focus-within .featured-product-card-content>*:not(.card-title) {
+    opacity: 1;
+    transition-delay: 700ms;
+  }
+
+  .featured-product-card:hover .featured-product-card-content,
+  .featured-product-card:focus-within .featured-product-card-content {
+    transform: translateY(0);
+    transition-delay: 500ms;
+  }
+
+  .featured-product-card:focus-within .featured-product-card-content {
+    transition-duration: 0ms;
+  }
+
+  .card-title::after {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+
+#services-heading {
+  font-family: "Inter", sans-serif;
+  margin: 5% 0 0 0;
+  font-size: 35px;
+  font-weight: 600;
   text-align: center;
 }
 
-.featuredproducts .product {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+.service-cards {
+  background: #FFF;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  box-sizing: border-box;
+  margin: 3% 8%;
+  gap: 20px;
 }
 
-.home-container .banner {
-  margin: 0 80px;
+
+
+.card-single {
+  width: 100%;
+  padding: 150px;
+  font-family: 'Nunito', sans-serif;
+  transition: ease all 600ms;
+  position: relative;
+  border-radius: 25px;
+}
+
+.card-single:hover {
+  transform: scale(1.1);
+  background: #FFF;
+  box-shadow: 0px 0px 10px #000;
+  z-index: 3;
+
+}
+
+.service-desc {
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: ease all 600ms;
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 200ms;
+}
+
+.card-single h3 {
+  text-align: center;
+  font-size: 24px;
+}
+
+.icon-wrapper {
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  padding: 60px 150px;
-  background-color: lightskyblue;
-  border-radius: 20px;
+  transition: ease all 600ms;
 }
 
-.home-container .banner .bannerinfo {
-  width: 600px;
+
+.card-single:hover .service-desc {
+  top: 150px;
+  visibility: visible;
+  opacity: 1;
 }
 
-.home-container .banner .bannerinfo h3 {
-  font-family: "DM Serif Display", serif;
-  font-size: xxx-large;
-  font-weight: 600;
-  margin: 0;
-  color: black;
+.card-single:hover .icon-wrapper {
+  top: 30px;
 }
 
-.home-container .banner .bannerinfo p {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-size: large;
-  margin: 15px 0;
-  color: rgb(255, 255, 255);
+@media (max-width: 600px) {
+  .service-cards {
+    grid-template-columns: repeat(1, 1fr);
+    margin: 5% 8%;
+
+  }
+
+  .home-container .banner1 {
+    width: 100%;
+  }
+
+  .home-container .banner1 .banner-vid {
+    width: 100%;
+  }
 }
 
-.home-container .banner .bannerimage img {
-  width: 600px;
-  height: auto;
-}
+@media (max-width: 900px) {
+  .service-cards {
+    grid-template-columns: repeat(1, 1fr);
+    margin: 5% 8%;
 
-.home-container .banner .bannerbtn button {
-  width: 150px;
-  padding: 12px 20px;
-  background-color: rgb(225, 232, 240);
-  border: none;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.home-container .banner .bannerbtn button:hover {
-  background-color: rgb(244, 246, 247);
+  }
 }

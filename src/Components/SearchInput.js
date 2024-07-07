@@ -2,15 +2,15 @@ import React, { useReducer } from "react";
 import { useSearch } from "../Context/searchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import SearchIcon from '@mui/icons-material/Search';
+import { FaSearch } from "react-icons/fa";
 
+import "./SearchInput.css";
 const SearchInput = ({ state, dispatch }) => {
     const [values, setValues] = useSearch();
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(values.keyword)
             const { data } = await axios.get(
                 `http://localhost:8080/api/v1/products/search/${values.keyword}`
             );
@@ -25,22 +25,18 @@ const SearchInput = ({ state, dispatch }) => {
         }
     };
     return (
-        <div>
-            <form
-                onSubmit={handleSubmit}
-            >
-                <input
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                    value={values.keyword}
+
+
+        <form onSubmit={handleSubmit}>
+            <div class="search-box">
+                <input type="text" class="search-box-input" placeholder="What are you looking for ?"
                     onChange={(e) => setValues({ ...values, keyword: e.target.value })}
-                />
-                <button className="btn btn-outline-success" type="submit" >
-                    <SearchIcon />
+                    value={values.keyword} />
+                <button class="search-box-btn">
+                    <i class="search-box-icon material-icons"><FaSearch className="search-box-i" /></i>
                 </button>
-            </form>
-        </div>
+            </div>
+        </form>
     );
 };
 

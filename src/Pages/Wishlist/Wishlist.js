@@ -3,7 +3,7 @@ import { useWishList } from '../../Context/wishListContext';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
-import emptycartimage from "../../Assets/TechHaven images/emptycartimg.png";
+import emptycartimage from "../../Assets/emptycartimg.png";
 import { Link, json } from "react-router-dom";
 import "./WishList.css";
 

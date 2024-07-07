@@ -1,21 +1,23 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Cart.css";
-import emptycartimage from "../../Assets/TechHaven images/emptycartimg.png";
+import emptycartimage from "../../Assets/emptycartimg.png";
 import CartComponent from "../../Components/cartComponent";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useCart } from "../../Context/cartContext";
+import SkeletonProductCard from "../../Components/SkeletonLoaderCard";
 
 const Cart = () => {
   const [productDetails, setProductDetails] = useState([]);
   const [qty, setQty] = useState(1);
   const [cart, setCart] = useCart();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
     fetchCartItems();
-
+    setLoading(false);
   }, []);
 
   const fetchCartItems = async () => {
@@ -106,32 +108,37 @@ const Cart = () => {
     </div>
   ) : (
     <div className="cart-container">
-      <div className="cart-item-display">
-        {productDetails.map(item => {
-          cart.find((e) => {
-            if (e._id === item._id) {
-              setQty(e.quantity);
-              console.log(qty)
-            }
-          })
-          return (
-            <div key={item._id} className="item-container">
-              <CartComponent
-                productId={item._id}
-                title={item.title}
-                price={item.price}
-                category={item.category}
-                discount={item.discount}
-                quantity={item.quantity}
-                img={`http://localhost:8080/api/v1/products/product-photo/${item._id}`}
-                qty={qty}
-                onQuantityChange={onQuantityChange}
+      {loading ? ((Array.from({ length: 6 }).map((_, index) => (
+        <SkeletonProductCard key={index} />
+      )))) : (
+        <div className="cart-item-display">
+          {productDetails.map(item => {
+            cart.find((e) => {
+              if (e._id === item._id) {
+                setQty(e.quantity);
+                console.log(qty)
+              }
+            })
+            return (
+              <div key={item._id} className="item-container">
+                <CartComponent
+                  productId={item._id}
+                  title={item.title}
+                  price={item.price}
+                  category={item.category}
+                  discount={item.discount}
+                  quantity={item.quantity}
+                  img={`http://localhost:8080/api/v1/products/product-photo/${item._id}`}
+                  qty={qty}
+                  onQuantityChange={onQuantityChange}
 
-              />
-            </div>
-          )
-        })}
-      </div>
+                />
+              </div>
+            )
+          })}
+        </div>)}
+
+
       <div className="cart-item-bill">
         <div className="bill-heading">
           <p>PRICE DETAILS</p>

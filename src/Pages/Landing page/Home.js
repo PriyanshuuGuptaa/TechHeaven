@@ -1,142 +1,189 @@
 import React from "react";
 import "./Home.css";
-import bestcollection from "../../Assets/TechHaven images/bestcollection.png";
-import bgimg from "../../Assets/TechHaven images/background.jpg";
-import { Link } from "react-router-dom";
-import mobiletype from "../../Assets/TechHaven images/mobiletype.png";
-import laptoptype from "../../Assets/TechHaven images/laptoptype.png";
-import watchtype from "../../Assets/TechHaven images/watchtype.png";
-import headsettype from "../../Assets/TechHaven images/headsettype.png";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import { CiPercent } from "react-icons/ci";
 import { FaHeadphonesAlt } from "react-icons/fa";
-import ProductCard from "../../Components/ProductCard";
-import bannerimage from "../../Assets/TechHaven images/bannerimage.png";
 import { useAuth } from "../../Context/authContext";
+import phonebanner from "../../Assets/phonebanner.gif";
+import laptopbanner from "../../Assets/laptopbanner.gif";
+import watchbanner from "../../Assets/watchbanner.gif";
+import headsetbanner from "../../Assets/headsetbanner.gif"
+import vid from "../../Assets/vid.mp4";
+import ReactPlayer from "react-player";
+import Slider from "react-slick";
 function Home({ state, dipatch }) {
   const [auth, setAuth] = useAuth();
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
+    arrows: false,
+
+
+
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
 
   return (
     <div className="home-container">
-
-
-      <div className="bestcollection">
-        <img src={bgimg} className="fade-in-top" />
-        {/* <p className="focus-in-expand">Best collection of <br />technical products </p> */}
+      <div className="banner1">
+        <ReactPlayer
+          url={vid} // Replace with the path to your video
+          playing={true} // Start playing automatically
+          muted={true}
+          loop={true} // Loop the video endlessly
+          controls={false} // Show controls like play, pause, etc.
+          width="100%" // Adjust the width as needed
+          height="100%" // Adjust the height as needed
+          className="banner-vid"
+        />
 
       </div>
+      <div className="top-catergories-section">
+        <div className="tc-heading">
+          <p>TOP CATEGORIES</p>
+        </div>
+        <div class="top-categories">
 
-      <div className="featuredproducts">
-        <h3>TOP PRODUCTS</h3>
-        <div className="product">
-
-          {state.products.map((info) => {
-
-            return info.featuredProduct ? (
-              <div className="product-card-div">
-                <ProductCard
-                  key={info._id}
-                  id={info._id}
-                  img={`http://localhost:8080/api/v1/products/product-photo/${info._id}`}
-                  category={info.category}
-                  title={info.title}
-                  price={info.price}
-                  discount={info.discount}
-                  rating={info.rating}
-                  discountedPrice={(info.price - (((info.price) * (10)) / 100))}
-                />
-              </div>
-            ) : (
-              ""
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="producttype">
-        <div className="type">
-          <Link to="/products" className="link">
-            <img src={mobiletype} alt="mobile" />
-            <p>MOBILE PHONES</p>
-          </Link>
-        </div>
-        <div className="type">
-          <Link to="/products" className="link">
-            <img src={laptoptype} alt="laptop" />
-            <p>LAPTOPS</p>
-          </Link>
-        </div>
-        <div className="type">
-          <Link to="/products" className="link">
-            <img src={headsettype} alt="headset" />
-            <p>HEADSETS</p>
-          </Link>
-        </div>
-        <div className="type">
-          <Link to="/products" className="link">
-            <img src={watchtype} alt="watch" />
-            <p>SMART WATCHES</p>
-          </Link>
-        </div>
-      </div>
-      <div className="services">
-        <div className="servicesinfo">
-          <div className="servicesinfoicon">
-            <CiDeliveryTruck />
+          <div className="top-category-cards">
+            <img src={laptopbanner} />
           </div>
-          <div className="servicesinfodetails">
-            <h3>Free Shipping</h3>
-            <p>Order Above ₹500</p>
+          < div className="top-category-cards">
+            <img src={watchbanner} />
           </div>
-        </div>
-        <div className="servicesinfo">
-          <div className="servicesinfoicon">
-            <FaIndianRupeeSign />
+          <div className="top-category-cards">
+            <img src={headsetbanner} />
           </div>
-          <div className="servicesinfodetails">
-            <h3>Return And Refund</h3>
-            <p>Money back gaurantee</p>
-          </div>
-        </div>
-        <div className="servicesinfo">
-          <div className="servicesinfoicon">
-            <CiPercent />
-          </div>
-          <div className="servicesinfodetails">
-            <h3>Member Discount</h3>
-            <p>On every order</p>
-          </div>
-        </div>
-        <div className="servicesinfo">
-          <div className="servicesinfoicon">
-            <FaHeadphonesAlt />
-          </div>
-          <div className="servicesinfodetails">
-            <h3>Customer Support</h3>
-            <p>24x7 customer support</p>
+          <div className="top-category-cards">
+            <img src={phonebanner} />
           </div>
         </div>
       </div>
 
 
 
+      {/* CAROUSEL */}
 
-      <div className="banner">
-        <div className="bannerinfo">
-          <h3>Great deals on all Apple Products</h3>
-          <p>STARTING FROM ₹19,999/-</p>
-          <div className="bannerbtn">
-            <Link to="/products" className="link">
-              <button>Shop now</button>
-            </Link>
+      <div className="featured-products-section">
+
+        <p id="fp-heading">TOP PRODUCTS</p>
+        <div className="featured-products-carousel">
+          <Slider {...settings}>
+
+            {state.products.map((info) => {
+              console.log(info)
+              return info.featuredProduct ? (
+                <div className="featured-product-card">
+                  <img src={`http://localhost:8080/api/v1/products/product-photo/${info._id}`} />
+                  <div className="featured-product-card-content">
+                    <p className="card-title">{info.title}</p>
+                    <div className="prices">
+                      <p className="card-mrp">₹{info.price}</p>
+                      <p className="card-price" style={{ margin: 0 }}>₹{(info.price - (info.price * (info.discount / 100)))}/-</p>
+                    </div>
+                    <p className="card-discount">{info.discount}% Off</p>
+                  </div>
+                </div>
+              ) : (
+                ""
+              );
+            })}
+          </Slider>
+        </div>
+      </div>
+
+      {/* OUR SERVICES */}
+      <div className="sevices-section">
+        <div>
+          <p id="services-heading">OUR SERVICES</p>
+        </div>
+        <div className="service-cards">
+          <div className="card-single">
+            <div className="icon-wrapper">
+              <h3>Free Shipping and Express Delivery</h3>
+            </div>
+            <div className="service-desc">
+              <p>Enjoy free standard shipping on all orders. Need it fast? Opt for our express delivery service to get your gadgets delivered at lightning speed, so you can start using them as soon as possible.</p>
+            </div>
           </div>
+          <div className="card-single">
+            <div className="icon-wrapper">
+              <h3>Extended Warranty and Protection Plans</h3>
+            </div>
+            <div className="service-desc">
+              <p> Protect your investment with our extended warranty and comprehensive protection plans. Cover accidental damage, theft, and more, ensuring peace of mind and longevity for your devices.</p>
+            </div>
+          </div>
+          <div className="card-single">
+            <div className="icon-wrapper">
+              <h3>Secure Payment Options</h3>
+            </div>
+            <div className="service-desc">
+              <p>Shop confidently with our range of secure payment options. From credit cards to digital wallets and payment plans, we offer multiple ways to pay securely and conveniently for your purchases.</p>
+            </div>
+          </div>
+          <div className="card-single">
+            <div className="icon-wrapper">
+              <h3>Admin Product Upload</h3>
+            </div>
+            <div className="service-desc">
+              <p>As an admin, you have the power to expand our product range by uploading your own items. Easily add new products, set prices, manage inventory, and update listings directly on our platform, helping to keep our catalog fresh and diverse..</p>
+            </div>
+          </div>
+          <div className="card-single">
+            <div className="icon-wrapper">
+              <h3>Exclusive Discount Codes and Promotions </h3>
+            </div>
+            <div className="service-desc">
+              <p>Save more with our special discount codes and promotions! Keep an eye on our website for seasonal sales, exclusive coupon codes, and bundle deals that make your favorite electronics more affordable than ever.</p>
+            </div>
+          </div>
+          <div className="card-single">
+            <div className="icon-wrapper">
+              <h3>Financing Options</h3>
+            </div>
+            <div className="service-desc">
+              <p>Need a flexible way to pay? Take advantage of our financing options, which allow you to spread the cost of your purchase over manageable monthly payments. Get the devices you need without straining your budget.</p>
+            </div>
+          </div>
+
         </div>
-        <div className="bannerimage">
-          <img src={bannerimage} alt="bannerimg"></img>
-        </div>
+
       </div>
     </div>
+
+
+
   );
 }
 export default Home;

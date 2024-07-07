@@ -1,79 +1,31 @@
 .navbar-container {
-  padding: 10px 70px 0 150px;
+  padding: 10px 5%;
   background-color: transparent;
   top: 0;
   z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+
 
 }
-
 
 .navbar-container ul li {
   list-style-type: none;
-}
-
-.navbar-container .logoandname {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(88, 158, 229);
-  text-decoration: none;
 }
 
 h2 {
   text-decoration: none;
 }
 
-.navbar-container img {
-  height: 60px;
+
+
+.logo img {
+  height: 70px;
   width: auto;
-}
-
-
-.navbar-container .searchbox {
-  position: relative;
-}
-
-.navbar-container .searchbox form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
-.navbar-container .searchbox form button {
-  position: absolute;
-  width: auto;
-  height: auto;
-  text-align: center;
-  background-color: transparent;
-  border: 0;
-  right: 0;
-  color: rgb(88, 158, 229);
-}
-
-.navbar-container .searchbox input {
-  width: 150px;
-  height: 31px;
-  border: rgb(88, 158, 229) solid 2px;
-  color: rgb(162, 160, 160);
-  border-radius: 25px;
-  padding: 0 0 0 15px;
-  background-color: transparent;
-
-}
-
-.navbar-container .searchbox button {
-  border: 1px rgb(88, 158, 229) solid;
-  background-color: rgb(88, 158, 229);
-  cursor: pointer;
-  color: white;
-  outline: none;
-  padding: 9px 9px 10px;
-
-  text-align: center;
 }
 
 .navlink-container {
@@ -86,7 +38,8 @@ h2 {
 
 .userwishlistcart {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  gap: 15px;
 }
 
 .userwishlistcart .link {
@@ -95,37 +48,127 @@ h2 {
   ;
 }
 
-.searchbox
-/* styles.css */
-
-/* Hide the clear button in Chrome and Safari */
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* Hide the clear button in Edge */
-input[type="search"]::-ms-clear {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-/* Hide the clear button in Firefox (not natively supported) */
-input[type="search"] {
-  -moz-appearance: textfield;
-  /* Removes the clear button but changes input type to textfield */
-}
-
-/* Additional styling to prevent UI quirks */
-input[type="search"] {
-  border: 1px solid #ccc;
+.userwishlistcart .icon {
+  background-color: white;
+  border-radius: 50%;
   padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 5px;
+
 }
 
-#basic-button {
+#close-btn {
+  margin: 2% 3% 0 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.menu-container {
+  overflow-y: hidden;
+}
+
+.menu-container div {
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 0;
+  color: white;
+}
+
+.menu-container p {
+  font-weight: 700;
+  background-color: white;
   color: black;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.menu-container div:hover {
+  cursor: pointer;
+
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+  z-index: 100;
+}
+
+.mobile-menu #auth-menu {
+  margin: 0;
+}
+
+.mobile-menu button {
+  align-self: flex-end;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-size: 23px;
+  color: white;
+}
+
+.mobile-menu button:hover {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin-top: 40px;
+}
+
+ul li {
+  margin: 20px 0;
+  overflow-y: hidden;
+  user-select: none;
+
+
+}
+
+ul li div {
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 34px;
+
+}
+
+ul li div:hover {
+  font-style: italic;
+  cursor: pointer;
+}
+
+@media(max-width:426px) {
+  .navbar-container img {
+    width: 130px;
+    height: 40px;
+  }
+
+
+  .userwishlistcart {
+    gap: 3px;
+  }
+
+  .menu-container p {
+    font-size: 10px;
+    padding: 6px;
+  }
+
+  .userwishlistcart .icon {
+    padding: 4px;
+    border-radius: 60%;
+  }
+
+  .userwishlistcart .icon .i {
+    height: 10px;
+  }
+
 }
