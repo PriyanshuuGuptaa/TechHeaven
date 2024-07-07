@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Components/ProductCard.css";
 import { FaStar } from "react-icons/fa6";
-import { FaHeart } from "react-icons/fa";
-import axios from "axios";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'; import axios from "axios";
 import { toast } from "react-toastify";
 import { useWishList } from "../Context/wishListContext";
 import { useNavigate } from "react-router-dom";
@@ -105,7 +104,7 @@ const ProductCard = (info) => {
         className={`like-button ${wishList.some(item => item.productId === info.id) ? 'liked' : ''}`}
         disabled={info.needWishListBtn ? false : true}
       >
-        <FaHeart />
+        <FavoriteBorderIcon />
       </button>
 
       <div className="card-container" onClick={() => { openProductPage(info.id) }}>
@@ -113,12 +112,12 @@ const ProductCard = (info) => {
           <img src={info.img} alt={info.title} />
         </div>
         <div className="card-details">
-          <div className="card-category">
+          {/* <div className="card-category">
             <p>{info.category}</p>
-          </div>
-          <div className="card-rating">
+          </div> */}
+          {/* <div className="card-rating">
             {info.rating} <FaStar className="star" />
-          </div>
+          </div> */}
         </div>
         <div>
           <div className="card-title">
@@ -126,8 +125,8 @@ const ProductCard = (info) => {
           </div>
           <div className="card-price">
             <p id="discountedprice">₹ {info.discountedPrice}</p>
-            <p id="actualprice">₹{info.price}</p>
-            <p id="discount">{info.discount}% off</p>
+            {/* <p id="actualprice">₹{info.price}</p> */}
+            {/* <p id="discount">{info.discount}% off</p> */}
           </div>
         </div>
       </div>

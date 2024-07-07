@@ -1,49 +1,44 @@
 .card-container {
   position: relative;
   display: flex;
+  width: 15rem;
   height: auto;
-  width: 200px;
   flex-direction: column;
-  border: 1px rgb(147, 145, 145) solid;
-  padding: 15px;
   margin: 5px;
-  cursor: pointer;
-  transition: 0.5s;
-  background-color: white;
   border-radius: 10px;
+
 }
 
-.card-container:hover {
-  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 10px;
-}
-
-.card-img {
-  border-bottom: 1px rgb(147, 145, 145) solid;
-  display: flex;
-  justify-content: center;
-  padding: 5px 0 10px;
-}
 
 .card-img img {
   width: 100%;
-  height: 200px;
+  height: 100%;
+  background-color: #F3F3F3;
+  border-radius: 25px;
 }
+
 
 .card-category p {
   color: rgb(147, 145, 145);
   margin: 0;
 }
 
+.card-title {
+  width: 100%;
+  margin: 0 22px 0;
+}
+
 .card-title p {
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 5px 0 0 0;
-  text-transform: uppercase;
 }
 
 .card-price {
   display: flex;
   margin: 5px 0 0 0;
+  align-items: center;
+
 }
 
 .card-price p {
@@ -51,10 +46,13 @@
   text-align: center;
 }
 
+
+
 .card-price #discountedprice {
   font-size: 17px;
   font-weight: 500;
-  margin: 0;
+  margin: 0 22px 0;
+
 }
 
 .card-price #actualprice {
@@ -91,16 +89,16 @@
 }
 
 .like-button {
-  background: none;
-  border: none;
+
   cursor: pointer;
-  font-size: 24px;
-  color: grey;
+  width: auto;
+  color: white;
   transition: color 0.3s ease;
   position: absolute;
   z-index: 1;
-  right: 3%;
-  top: 3%;
+  right: 8%;
+  top: 6%;
+
 }
 
 
