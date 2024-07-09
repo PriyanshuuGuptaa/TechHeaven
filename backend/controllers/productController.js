@@ -2,6 +2,9 @@ import fs from "fs";
 import productModel from '../models/productModel.js';
 import slugify from "slugify";
 import mongoose from "mongoose";
+import multer from "multer";
+import path from "path";
+
 export const ProductController = async (req, res) => {
     try {
         const { id } = req.params;
@@ -43,10 +46,7 @@ export const ProductController = async (req, res) => {
                 break;
         }
         const products = new productModel({ ...req.fields, slug: slugify(title) });
-        if (image) {
-            products.image.data = fs.readFileSync(image.path);
-            products.image.contentType = image.type;
-        }
+
         await products.save()
         res.status(200).send({
             success: true,
@@ -128,23 +128,68 @@ export const deleteProductController = async (req, res) => {
     }
 };
 
-//get photo
+//upload photo
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+const uploadImages = upload.array('image', 5); // Limit to 10 images
 export const productPhotoController = async (req, res) => {
-    try {
-        const product = await productModel.findById(req.params.pid).select("image");
-        if (product.image.data) {
-            res.set("Content-type", product.image.contentType);
-            return res.status(200).send(product.image.data);
+    uploadImages(req, res, async (err) => {
+        if (err) {
+            return res.status(400).send({ success: false, message: "Error while uploading images", err });
         }
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success: false,
-            message: "Erorr while getting image",
-            error,
-        });
-    }
+
+        try {
+            // Find the product by ID
+            const product = await productModel.findById(req.params.pid);
+
+            if (!product) {
+                return res.status(404).send({ success: false, message: "Product not found" });
+            }
+
+            // Iterate over each file and add it to the product's image array
+            req.files.forEach((file) => {
+                const newImage = {
+                    image: {
+                        data: file.buffer, // Buffer containing the image data
+                        contentType: file.mimetype // Image MIME type
+                    }
+                };
+                product.image.push(newImage);
+            });
+
+            // Save the product document
+            await product.save();
+
+            res.status(200).send({
+                success: true,
+                message: "Images uploaded successfully",
+                image: product.image
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({
+                success: false,
+                message: "Error while saving images",
+                error,
+            });
+        }
+    });
 };
+//get photo
+export const getAllImages = async (req, res) => {
+    try {
+        const product = await productModel.findById(req.params.pid).select('image');
+        if (!product) {
+            return res.status(404).send({ success: false, message: "Product not found" });
+        }
+        console.log(product)
+
+        res.status(200).send({ success: true, images: product.image });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, message: "Error while fetching images", error });
+    }
+}
 
 //update product 
 export const UpdateProductController = async (req, res) => {

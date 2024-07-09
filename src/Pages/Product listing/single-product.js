@@ -7,7 +7,7 @@ import { useAuth } from '../../Context/authContext'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import StarIcon from '@mui/icons-material/Star';
 import './single-product.css';
-import { yellow } from '@mui/material/colors';
+import { Buffer } from 'buffer';
 
 const SingleProduct = () => {
     const { id } = useParams();
@@ -15,23 +15,36 @@ const SingleProduct = () => {
     const [cart, setCart] = useCart();
     const [singleProduct, setSingleProduct] = useState({});
     const { state, dispatch } = useAuth(); // Assuming you have a context for auth
+    const [images, setImages] = useState([]);
+    const [imgIndex, setImgIndex] = useState(0);
 
+    const changeImg = (index) => {
+        setImgIndex(index);
+    };
 
     useEffect(() => {
         getProductInfo();
+        const fetchImages = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/v1/products/${id}/images`);
+                setImages(response.data.images);
+            } catch (error) {
+                console.error('Error fetching images:', error);
+            }
+        };
+
+        fetchImages();
     }, [id]);
 
     const getProductInfo = async () => {
         try {
             const res = await axios.get(`http://localhost:8080/api/v1/products/single-product/${id}`);
             setSingleProduct(res.data.product);
-
         } catch (error) {
             console.error("Error fetching product info:", error);
             toast.error("Failed to fetch product details.");
         }
     };
-
 
     const handleCart = async (product) => {
         try {
@@ -43,7 +56,6 @@ const SingleProduct = () => {
                 { token, cartItems: [cartItem] },
                 { headers: { Authorization: formattedToken } }
             );
-
 
             if (response.data.success) {
                 const updatedCart = [...cart];
@@ -67,41 +79,69 @@ const SingleProduct = () => {
         }
     };
 
-
     const exitSingleProduct = () => {
         navigate("/products");
     };
+
     let productRating = singleProduct.rating;
-    console.log(productRating)
+
     return (
         <div className='single-product-container'>
             <button id='exit-btn' onClick={exitSingleProduct}><ArrowBackIcon /></button>
             <div className='single-product-image'>
-                <img src={`http://localhost:8080/api/v1/products/product-photo/${id}`} alt={singleProduct.title} />
+                <div className="img-container">
+                    <div className="other-images">
+                        {images.map((image, index) => (
+                            <div
+                                key={index}
+                                onClick={() => changeImg(index)}
+                                className="other-product-image"
+                            >
+                                {image.image && image.image.data && (
+                                    <img
+                                        src={`data:${image.image.contentType};base64,${Buffer.from(image.image.data).toString('base64')}`}
+                                        alt={`Image ${index}`}
+
+                                    />
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                    <div
+                        className="main-product-image"
+                    >
+                        {images.length > 0 && images[imgIndex]?.image && images[imgIndex].image.data && (
+                            <img
+                                src={`data:${images[imgIndex].image.contentType};base64,${Buffer.from(images[imgIndex].image.data).toString('base64')}`}
+                                alt={`Image ${imgIndex}`}
+                            />
+                        )}
+                    </div>
+
+                </div>
                 <div className='buttons'>
-                    <button onClick={() => handleCart(singleProduct)} id='addtocart' >Add to cart</button>
+                    <button onClick={() => handleCart(singleProduct)} id='addtocart'>Add to cart</button>
                     <button id='buynow'>Buy Now</button>
                 </div>
             </div>
             <div className='single-product-details'>
                 <p id='category'>{singleProduct.category}</p>
                 <p id='title'><b>{singleProduct.title}</b></p>
-                <p id='rating'>{Array.from({ length: productRating }, (_, i) => (
-                    <StarIcon key={i} sx={{ color: 'orange' }} />
-                ))}</p>
+                <p id='rating'>
+                    {Array.from({ length: productRating }, (_, i) => (
+                        <StarIcon key={i} sx={{ color: 'orange' }} />
+                    ))}
+                </p>
                 <div className='discountandprice'>
-                    <p id='discountedPrice'>₹{(singleProduct.price - (singleProduct.price * (singleProduct.discount / 100))).toFixed(2)} </p>
+                    <p id='discountedPrice'>₹{(singleProduct.price - (singleProduct.price * (singleProduct.discount / 100))).toFixed(2)}</p>
                     <p id='discount'>{singleProduct.discount}% Off</p>
                 </div>
                 <p id='actualPrice'>₹{singleProduct.price}</p>
                 <p id="product-description">{singleProduct.description}</p>
-
             </div>
-            <div className='description'>
-
-            </div>
+            <div className='description'></div>
         </div>
     );
-}
+};
 
 export default SingleProduct;

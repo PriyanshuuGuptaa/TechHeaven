@@ -7,13 +7,13 @@
     width: 100%;
     font-family: "Kumbh Sans", sans-serif;
     position: relative;
-
+    top: 80px;
 }
 
 #exit-btn {
     position: absolute;
     top: 0;
-    left: 14%;
+    left: 5%;
     cursor: pointer;
     font-size: larger;
     font-weight: 600;
@@ -23,15 +23,60 @@
 
 
 .single-product-container .single-product-image {
-    height: 2auto;
-    width: 25rem;
-    position: sticky;
-    overflow: hidden;
+    height: auto;
+    width: 33rem;
 }
 
-.single-product-container .single-product-image img {
+.img-container {
+    display: flex;
+    gap: 10px;
+
+}
+
+.other-images {
+    display: flex;
+    flex-direction: column;
+    height: 25rem;
+    width: 6rem;
+
+}
+
+.main-product-image {
     width: 100%;
-    height: auto;
+    height: 25rem;
+    cursor: pointer;
+
+}
+
+.main-product-image img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid lightgray;
+
+}
+
+.other-product-image img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid lightgray;
+    cursor: pointer;
+
+}
+
+.single-product-container .single-product-image .buttons {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0 88px;
+    gap: 10px;
+
+
+}
+
+.single-product-container .single-product-image .buttons button {
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .single-product-container .single-product-details {
@@ -95,17 +140,12 @@
     font-weight: 500;
 }
 
-.single-product-container .single-product-image .buttons {
-    display: flex;
-    justify-content: space-between;
-}
+
 
 
 
 #addtocart {
-    padding: 14px;
-    width: 12rem;
-    border-radius: 10px;
+
     background-color: rgb(88, 158, 229);
     color: white;
     font-weight: 600;
@@ -113,9 +153,7 @@
 }
 
 #buynow {
-    padding: 14px;
-    width: 12rem;
-    border-radius: 10px;
+
     background-color: orange;
     font-weight: 600;
     cursor: pointer;

@@ -1,9 +1,5 @@
 import React from "react";
 import "./Home.css";
-import { CiDeliveryTruck } from "react-icons/ci";
-import { FaIndianRupeeSign } from "react-icons/fa6";
-import { CiPercent } from "react-icons/ci";
-import { FaHeadphonesAlt } from "react-icons/fa";
 import { useAuth } from "../../Context/authContext";
 import phonebanner from "../../Assets/phonebanner.gif";
 import laptopbanner from "../../Assets/laptopbanner.gif";
@@ -12,8 +8,10 @@ import headsetbanner from "../../Assets/headsetbanner.gif"
 import vid from "../../Assets/vid.mp4";
 import ReactPlayer from "react-player";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 function Home({ state, dipatch }) {
   const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
   const settings = {
     dots: true,
     infinite: true,
@@ -53,6 +51,9 @@ function Home({ state, dipatch }) {
       }
     ]
   };
+  const openProductPage = (id) => {
+    navigate(`/single-product/${id}`);
+  }
 
   return (
     <div className="home-container">
@@ -105,13 +106,14 @@ function Home({ state, dipatch }) {
               return info.featuredProduct ? (
                 <div className="featured-product-card">
                   <img src={`http://localhost:8080/api/v1/products/product-photo/${info._id}`} />
+                  <p className="card-discount">{info.discount}% Off</p>
                   <div className="featured-product-card-content">
-                    <p className="card-title">{info.title}</p>
+                    <p className="fp-card-title">{info.title}</p>
                     <div className="prices">
-                      <p className="card-mrp">₹{info.price}</p>
                       <p className="card-price" style={{ margin: 0 }}>₹{(info.price - (info.price * (info.discount / 100)))}/-</p>
+                      <p className="card-mrp">₹{info.price}</p>
                     </div>
-                    <p className="card-discount">{info.discount}% Off</p>
+                    <button className="fp-shop-btn" onClick={() => { openProductPage(info._id) }}>Shop Now</button>
                   </div>
                 </div>
               ) : (

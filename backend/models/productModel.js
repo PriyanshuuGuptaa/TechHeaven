@@ -1,5 +1,13 @@
 import mongoose from "mongoose";
 
+const productImageSchema = new mongoose.Schema({
+
+    image: {
+        data: Buffer,
+        contentType: String,
+    }
+})
+
 const productSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -26,10 +34,6 @@ const productSchema = new mongoose.Schema({
         ref: "category",
         required: true
     },
-    image: {
-        data: Buffer,
-        contentType: String
-    },
     shipping: {
         type: Boolean
     },
@@ -44,6 +48,7 @@ const productSchema = new mongoose.Schema({
     featuredProduct: {
         type: Boolean,
         required: true
-    }
+    },
+    image: [productImageSchema]
 })
 export default mongoose.model("product", productSchema);

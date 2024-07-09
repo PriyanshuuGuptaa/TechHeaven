@@ -5,12 +5,16 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'; import axio
 import { toast } from "react-toastify";
 import { useWishList } from "../Context/wishListContext";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from 'buffer';
+
 
 const ProductCard = (info) => {
   const [wishList, setWishList] = useWishList();
   const navigate = useNavigate();
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const [images, setImages] = useState([]);
 
+  console.log(images, "imgs")
   let updatedWishlist = [];
 
   // Initialize wishlist from local storage
@@ -96,6 +100,20 @@ const ProductCard = (info) => {
   const openProductPage = (id) => {
     navigate(`/single-product/${id}`);
   }
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/v1/products/${info.id}/images`);
+        setImages(response.data.images);
+        console.log(response.data)
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+    fetchImages();
+  }, [info.id]);
+
   return (
     <div className="card-div">
 
@@ -109,7 +127,12 @@ const ProductCard = (info) => {
 
       <div className="card-container" onClick={() => { openProductPage(info.id) }}>
         <div className="card-img">
-          <img src={info.img} alt={info.title} />
+          {images.length > 0 && images[0].image && images[0].image.data && (
+            <img
+              src={`data:${images[1].image.contentType};base64,${Buffer.from(images[1].image.data).toString('base64')}`}
+              alt={`Image 0`}
+            />
+          )}
         </div>
         <div className="card-details">
           {/* <div className="card-category">

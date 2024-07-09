@@ -201,7 +201,6 @@ export const cartitemController = async (req, res) => {
 
         // Iterate through the cart items sent in the request
         for (const item of cartItems) {
-            console.log(item)
             const product = await productModel.findById(item.productId);
             if (!product) {
                 return res.status(404).json({
@@ -223,7 +222,6 @@ export const cartitemController = async (req, res) => {
                 // Otherwise, add new item
                 user.cartItems.push({ productId: item.productId, quantity: item.quantity });
             }
-
         }
 
         // Save the updated user document
