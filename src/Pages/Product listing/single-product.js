@@ -8,6 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import StarIcon from '@mui/icons-material/Star';
 import './single-product.css';
 import { Buffer } from 'buffer';
+import ProductImages from '../../Components/ProductImage';
 
 const SingleProduct = () => {
     const { id } = useParams();
@@ -91,31 +92,19 @@ const SingleProduct = () => {
             <div className='single-product-image'>
                 <div className="img-container">
                     <div className="other-images">
-                        {images.map((image, index) => (
+                        {[1, 2, 3].map((index) => (
                             <div
                                 key={index}
                                 onClick={() => changeImg(index)}
                                 className="other-product-image"
                             >
-                                {image.image && image.image.data && (
-                                    <img
-                                        src={`data:${image.image.contentType};base64,${Buffer.from(image.image.data).toString('base64')}`}
-                                        alt={`Image ${index}`}
-
-                                    />
-                                )}
+                                <ProductImages productId={id} index={index} />
                             </div>
                         ))}
                     </div>
                     <div
                         className="main-product-image"
-                    >
-                        {images.length > 0 && images[imgIndex]?.image && images[imgIndex].image.data && (
-                            <img
-                                src={`data:${images[imgIndex].image.contentType};base64,${Buffer.from(images[imgIndex].image.data).toString('base64')}`}
-                                alt={`Image ${imgIndex}`}
-                            />
-                        )}
+                    ><ProductImages productId={id} index={imgIndex} />
                     </div>
 
                 </div>
@@ -127,16 +116,16 @@ const SingleProduct = () => {
             <div className='single-product-details'>
                 <p id='category'>{singleProduct.category}</p>
                 <p id='title'><b>{singleProduct.title}</b></p>
-                <p id='rating'>
+                {/* <p id='rating'>
                     {Array.from({ length: productRating }, (_, i) => (
                         <StarIcon key={i} sx={{ color: 'orange' }} />
                     ))}
-                </p>
+                </p> */}
                 <div className='discountandprice'>
                     <p id='discountedPrice'>₹{(singleProduct.price - (singleProduct.price * (singleProduct.discount / 100))).toFixed(2)}</p>
+                    <p id='actualPrice'>₹{singleProduct.price}</p>
                     <p id='discount'>{singleProduct.discount}% Off</p>
                 </div>
-                <p id='actualPrice'>₹{singleProduct.price}</p>
                 <p id="product-description">{singleProduct.description}</p>
             </div>
             <div className='description'></div>

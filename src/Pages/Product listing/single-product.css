@@ -43,14 +43,13 @@
 
 .main-product-image {
     width: 100%;
-    height: 25rem;
     cursor: pointer;
 
 }
 
 .main-product-image img {
     width: 100%;
-    height: 100%;
+    height: 25rem;
     border: 1px solid lightgray;
 
 }
@@ -59,7 +58,6 @@
     width: 100%;
     height: 100%;
     border: 1px solid lightgray;
-    cursor: pointer;
 
 }
 
