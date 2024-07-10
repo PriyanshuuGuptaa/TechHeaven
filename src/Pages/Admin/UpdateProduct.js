@@ -138,9 +138,9 @@ const UpdateProduct = () => {
     };
 
     return (
-        <div>
+        <div className='admin-dashboard-container'>
             <h1>ADMIN DASHBOARD</h1>
-            <div className='admin-dashboard-container'>
+            <div >
                 <div className='admin-menu'>
                     <div className='admin-menu-items'>
                         <Link to="/dashboard/admin/create-category">Create Category</Link>

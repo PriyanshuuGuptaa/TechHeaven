@@ -114,9 +114,9 @@ const CreateCategory = () => {
         }
     }
     return (
-        <div>
+        <div className='admin-dashboard-container'>
             <h1>ADMIN DASHBOARD</h1>
-            <div className='admin-dashboard-container'>
+            <div >
                 <div className='admin-menu'>
                     <ButtonGroup size="large" aria-label="Large button group"  >
                         {buttons}

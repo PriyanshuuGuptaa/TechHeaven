@@ -9,13 +9,14 @@ import vid from "../../Assets/vid.mp4";
 import ReactPlayer from "react-player";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
+import ProductImages from "../../Components/ProductImage";
 function Home({ state, dipatch }) {
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     speed: 3000,
@@ -105,7 +106,7 @@ function Home({ state, dipatch }) {
               console.log(info)
               return info.featuredProduct ? (
                 <div className="featured-product-card">
-                  <img src={`http://localhost:8080/api/v1/products/product-photo/${info._id}`} />
+                  <ProductImages productId={info._id} index={0} />
                   <p className="card-discount">{info.discount}% Off</p>
                   <div className="featured-product-card-content">
                     <p className="fp-card-title">{info.title}</p>
