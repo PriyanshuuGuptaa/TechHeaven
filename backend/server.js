@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js"
 import productRoute from "./routes/productRoute.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 //configure env
 dotenv.config();
 
@@ -20,6 +21,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 //routes
 app.use("/api/v1/auth", authRoutes);

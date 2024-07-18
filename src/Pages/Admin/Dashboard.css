@@ -49,31 +49,45 @@ h1 {
 }
 
 .create-product-details {
-    border: 1px black solid;
     margin: 2% 20%;
     padding: 3% 0;
 
+    background-color: beige;
 }
 
-.create-product-details h3 {
-    text-align: center;
-    margin: 0;
-}
+
 
 .create-product-details .select-image {
-
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.create-product-details .select-image input {
-    padding: 1%;
-    text-align: center;
-    width: auto;
-    background-color: transparent;
+.select-image .img-preview {
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+
 }
+
+.select-image .img-preview img {
+    height: 100%;
+    width: 100%;
+}
+
+input[type="file"] {
+    color: transparent;
+    width: 120px;
+    padding-right: 32px;
+    margin: 0 auto;
+}
+
 
 .create-product-details form {
     display: flex;

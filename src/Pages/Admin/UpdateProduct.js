@@ -14,7 +14,6 @@ const UpdateProduct = () => {
     const [image, setImage] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedCategoryName, setSelectedCategoryName] = useState("Select a category");
-
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");

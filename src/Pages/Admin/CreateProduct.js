@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../Context/authContext';
-import "./Dashboard.css";
-import { styled, alpha } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import ButtonGroup from '@mui/material/ButtonGroup';
-
+import { Button, ButtonGroup } from '@mui/material';
 
 const CreateProduct = () => {
     const [categories, setCategories] = useState([]);
-    const [image, setImage] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedCategoryName, setSelectedCategoryName] = useState("Select a category");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -24,94 +15,25 @@ const CreateProduct = () => {
     const [shipping, setShipping] = useState(false);
     const [featuredProduct, setFeaturedProduct] = useState(false);
     const [discount, setDiscount] = useState("");
+    const [images, setImages] = useState([]);
     const navigate = useNavigate();
 
-    const buttons = [
-        <Button key="one" sx={{ borderColor: 'black' }}>
-            <Link to="/dashboard/admin/create-category" style={{ textDecoration: "none", color: 'black' }} >Create Category</Link>
-        </Button>,
-        <Button key="two" sx={{ borderColor: 'black' }}>
-
-            <Link to="/dashboard/admin/create-product" style={{ textDecoration: "none", color: 'black' }}>Create Product</Link>
-        </Button>,
-        <Button key="three" sx={{ borderColor: 'black' }}>
-
-            <Link to="/dashboard/admin/products" style={{ textDecoration: "none", color: 'black' }}>Products</Link>
-        </Button>,
-        <Button key="four" sx={{ borderColor: 'black' }}>
-            <Link to="/dashboard/admin/users" style={{ textDecoration: "none", color: 'black' }}>Users</Link>
-        </Button>
-    ];
-
-
-
-    const StyledMenu = styled((props) => (
-        <Menu
-            elevation={0}
-            anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-            }}
-            transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-            }}
-            {...props}
-        />
-    ))(({ theme }) => ({
-        "& .MuiPaper-root": {
-            borderRadius: 6,
-            marginTop: theme.spacing(1),
-            minWidth: 180,
-            color:
-                theme.palette.mode === "light"
-                    ? "rgb(55, 65, 81)"
-                    : theme.palette.grey[300],
-            boxShadow:
-                "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-            "& .MuiMenu-list": {
-                padding: "4px 0",
-            },
-            "& .MuiMenuItem-root": {
-                "& .MuiSvgIcon-root": {
-                    fontSize: 18,
-                    color: theme.palette.text.secondary,
-                    marginRight: theme.spacing(1.5),
-                },
-                "&:active": {
-                    backgroundColor: alpha(
-                        theme.palette.primary.main,
-                        theme.palette.action.selectedOpacity
-                    ),
-                },
-            },
-        },
-    }));
-
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const getAllCategories = async () => {
-        try {
-            const category = await axios.get("http://localhost:8080/api/v1/category/allCategories");
-            setCategories(category.data.allCategories);
-        } catch (error) {
-            toast.error("Failed to load categories");
-        }
-    };
-
     useEffect(() => {
+        const getAllCategories = async () => {
+            try {
+                const response = await axios.get("http://localhost:8080/api/v1/category/allCategories");
+                setCategories(response.data.allCategories);
+            } catch (error) {
+                toast.error("Failed to load categories");
+            }
+        };
         getAllCategories();
     }, []);
 
     const createProductHandler = async (e) => {
         e.preventDefault();
 
-        if (!image || !title || !description || !price || !quantity || !rating || !discount || !featuredProduct || selectedCategory === "Select a category") {
+        if (!title || !description || !price || !quantity || !rating || !discount || !selectedCategory) {
             toast.error("Please fill all the fields");
             return;
         }
@@ -121,28 +43,33 @@ const CreateProduct = () => {
         formData.append('description', description);
         formData.append('price', price);
         formData.append('quantity', quantity);
-        formData.append('image', image);
-        formData.append('category', selectedCategoryName);
-        formData.append('shipping', shipping);
         formData.append('rating', rating);
         formData.append('discount', discount);
+        formData.append('shipping', shipping);
         formData.append('featuredProduct', featuredProduct);
+        formData.append('category', selectedCategory);
 
-
+        images.forEach((image, index) => {
+            formData.append('images', image);
+        });
 
         try {
-            const { data } = await axios.post(
+            const response = await axios.post(
                 "http://localhost:8080/api/v1/products/create-product",
-                formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }
-            });
-            if (data?.success) {
+            );
+            console.log('Product created:', response.data);
+
+            if (response.data.success) {
                 toast.success("Product Created Successfully");
-                navigate("/dashboard/admin/create-product");
+                navigate("/dashboard/admin/products");
             } else {
-                toast.error(data?.message);
+                toast.error(response.data?.message);
             }
         } catch (error) {
             console.error("Error creating product:", error.response ? error.response.data : error.message);
@@ -150,74 +77,57 @@ const CreateProduct = () => {
         }
     };
 
+    const uploadImage = (e) => {
+        const files = Array.from(e.target.files);
+        setImages(prevImages => [...prevImages, ...files]);
+    };
+
     return (
         <div className='admin-dashboard-container'>
             <h1>ADMIN DASHBOARD</h1>
-            <div >
+            <div>
                 <div className='admin-menu'>
-                    <ButtonGroup size="large" aria-label="Large button group" >
-                        {buttons}
+                    <ButtonGroup size="large" aria-label="Large button group">
+                        <Button>
+                            <Link to="/dashboard/admin/create-category" style={{ textDecoration: "none", color: 'black' }}>Create Category</Link>
+                        </Button>
+                        <Button>
+                            <Link to="/dashboard/admin/create-product" style={{ textDecoration: "none", color: 'black' }}>Create Product</Link>
+                        </Button>
+                        <Button>
+                            <Link to="/dashboard/admin/products" style={{ textDecoration: "none", color: 'black' }}>Products</Link>
+                        </Button>
+                        <Button>
+                            <Link to="/dashboard/admin/users" style={{ textDecoration: "none", color: 'black' }}>Users</Link>
+                        </Button>
                     </ButtonGroup>
-
                 </div>
 
                 <div className='create-product-details'>
-                    <h3>CREATE PRODUCT</h3>
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}>
-                        < Button
-                            id="demo-customized-button"
-                            aria-controls={open ? "demo-customized-menu" : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? true : undefined}
-                            variant="outlined"
-                            disableElevation
-                            onClick={handleClick}
-                            className='select-category-btn'
-                            sx={{ margin: '20px' }}
-                        >
-                            {selectedCategoryName}
-                        </Button>
-                        <StyledMenu
-                            id="demo-customized-menu"
-                            MenuListProps={{
-                                "aria-labelledby": "demo-customized-button",
-                            }}
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={() => { setAnchorEl(null); }}
-                        >
-                            {categories.map((e) => (
-                                <MenuItem
-                                    onClick={() => {
-                                        setAnchorEl(null);
-                                        setSelectedCategory(e._id);
-                                        setSelectedCategoryName(e.categoryName);
-                                    }}
-                                    disableRipple
-                                    key={e._id}
-                                >
-                                    {e.categoryName}
-                                </MenuItem>
+                    <div>
+                        <label htmlFor="category">Select a category:</label>
+                        <select id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                            <option value="">Select a category</option>
+                            {categories.map(category => (
+                                <option key={category._id} value={category._id}>{category.categoryName}</option>
                             ))}
-                        </StyledMenu>
+                        </select>
                     </div>
 
-                    <div className='select-image'>
-                        <input
-                            type="file"
-                            name="photo"
-                            accept="image/*"
-                            onChange={(e) => setImage(e.target.files[0])}
-                        />
-                        {image && (
-                            <img src={URL.createObjectURL(image)} height={"200px"} alt="Product" />
-                        )}
-                    </div>
-                    <form onSubmit={createProductHandler}>
+                    <form onSubmit={createProductHandler} encType="multipart/form-data">
+                        <div className='product-images'>
+                            <label>Upload images:</label>
+                            <input type="file" multiple onChange={uploadImage} />
+                            {images.map((img, index) => (
+                                <img
+                                    key={index}
+                                    src={URL.createObjectURL(img)}
+                                    alt={img.name}
+                                    style={{ width: '100px', height: '100px', objectFit: 'cover', margin: '10px' }}
+                                />
+                            ))}
+                        </div>
+
                         <input
                             type='text'
                             placeholder='Enter name of product'
@@ -263,7 +173,7 @@ const CreateProduct = () => {
                             />
                         </label>
                         <label>
-                            Do you want to feature this product?
+                            Featured Product:
                             <input
                                 type='checkbox'
                                 checked={featuredProduct}
@@ -274,7 +184,7 @@ const CreateProduct = () => {
                     </form>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

@@ -6,7 +6,10 @@ ul {
 .footer-section {
   margin: 5% 0 0 0;
   background: #151414;
+  position: relative;
+  bottom: 0;
 }
+
 
 .row {
   border-bottom: 1px solid #373636;

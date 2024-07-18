@@ -2,66 +2,68 @@ import fs from "fs";
 import productModel from '../models/productModel.js';
 import slugify from "slugify";
 import mongoose from "mongoose";
-import multer from "multer";
-import path from "path";
 
 export const ProductController = async (req, res) => {
     try {
-        const { id } = req.params;
+        console.log(req);
         const { title, description, price, rating, shipping, quantity, category, slug, discount, featuredProduct } = req.fields;
-        const { image } = req.files;
 
         switch (true) {
             case !title:
                 return res.status(500).send({ message: "Error in creating title" });
-                break;
             case !description:
                 return res.status(500).send({ message: "Error in creating description" });
-                break;
             case !price:
                 return res.status(500).send({ message: "Error in creating price" });
-                break;
             case !rating:
                 return res.status(500).send({ message: "Error in creating rating" });
-                break;
             case !shipping:
                 return res.status(500).send({ message: "Error in creating shipping address" });
-                break;
             case !quantity:
                 return res.status(500).send({ message: "Error in creating quantity" });
-                break;
             case !category:
                 return res.status(500).send({ message: "Error in creating category" });
-                break;
             case !discount:
-                return res.status(500).send({ message: "Error in creating discouunt" });
-                break;
+                return res.status(500).send({ message: "Error in creating discount" });
             case !featuredProduct:
                 return res.status(500).send({ message: "Error in featuring product" });
-                break;
-
-            case image && image.size > 1000000:
-                return res.status(500).send({ message: "image required should be less than 1mb" })
             default:
                 break;
         }
-        const products = new productModel({ ...req.fields, slug: slugify(title) });
 
-        await products.save()
-        res.status(200).send({
-            success: true,
-            message: "Product successfuly created",
-            products
-        })
+        const images = req.files.map(file => ({
+            filename: file.originalname,
+            contentType: file.mimetype,
+            data: file.buffer
+        }));
+
+        const newProduct = new productModel({
+            title,
+            description,
+            price,
+            rating,
+            shipping,
+            quantity,
+            category,
+            discount,
+            featuredProduct,
+            slug: slugify(title),
+            images
+        });
+
+        await newProduct.save();
+        res.status(201).send({ success: true, message: "Product created successfully", product: newProduct });
     } catch (error) {
         console.log(error);
         res.status(500).send({
             success: false,
             message: "Error in creating product",
             error
-        })
+        });
+    } finally {
+        await client.close();
     }
-}
+};
 
 //fetching all products
 export const allProducts = async (req, res) => {
@@ -129,9 +131,8 @@ export const deleteProductController = async (req, res) => {
 };
 
 //upload photo
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-const uploadImages = upload.array('image', 5); // Limit to 10 images
+
+
 export const productPhotoController = async (req, res) => {
     uploadImages(req, res, async (err) => {
         if (err) {
@@ -176,6 +177,7 @@ export const productPhotoController = async (req, res) => {
     });
 };
 //get photo
+
 export const getAllImages = async (req, res) => {
     try {
         const product = await productModel.findById(req.params.pid).select('image');

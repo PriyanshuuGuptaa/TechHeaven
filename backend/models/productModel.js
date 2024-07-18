@@ -1,12 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const productImageSchema = new mongoose.Schema({
-
-    image: {
-        data: Buffer,
-        contentType: String,
-    }
-})
+    data: Buffer,
+    contentType: String,
+});
 
 const productSchema = new mongoose.Schema({
     title: {
@@ -35,7 +32,8 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     shipping: {
-        type: Boolean
+        type: Boolean,
+        required: true
     },
     rating: {
         type: Number,
@@ -49,6 +47,15 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    image: [productImageSchema]
-})
-export default mongoose.model("product", productSchema);
+    images: {
+        type: [productImageSchema],
+        validate: {
+            validator: function (val) {
+                return val.length <= 4;  // Updated the limit to 12 as per multer configuration
+            },
+            message: props => `${props.path} exceeds the limit of 12`
+        }
+    }
+});
+
+export default mongoose.model("Product", productSchema);
