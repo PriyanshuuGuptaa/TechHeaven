@@ -1,25 +1,38 @@
-import express, { Router } from "express";
+import express from "express";
 import { isAdmin, requiresSignIn } from "../middlewares/authMiddleware.js";
 import { ProductController, UpdateProductController, allProducts, deleteProductController, getAllImages, productPhotoController, searchProductController, singleProductController } from "../controllers/productController.js";
-import formidable from "express-formidable";
 import multer from "multer";
 import bodyParser from "body-parser";
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now();
+        cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+});
+
+const upload = multer({ storage: storage });
 const router = express.Router();
-const upload = multer({ storage: multer.memoryStorage() });
+
 // Middleware to parse application/x-www-form-urlencoded
 router.use(bodyParser.urlencoded({ extended: false }));
 
 // Middleware to parse application/json
 router.use(bodyParser.json());
 
+// Route for creating a product
+router.post("/create-product", requiresSignIn, isAdmin, upload.array("images", 4), (req, res) => {
+    ProductController(req, res);
+});
 
-
-router.post("/create-product", requiresSignIn, isAdmin, formidable(), upload.array("images", 4), ProductController);
+// Other routes
 router.delete("/delete-product/:pid", requiresSignIn, isAdmin, deleteProductController);
-router.get("/all-products", allProducts, allProducts);
+router.get("/all-products", allProducts);
 router.get("/single-product/:pid", singleProductController);
-router.get("/:pid/images", getAllImages)
+router.get("/:pid/images", getAllImages);
 router.post('/:pid/images', productPhotoController);
 router.put("/update-product/:id", UpdateProductController);
 router.get("/search/:keyword", searchProductController);

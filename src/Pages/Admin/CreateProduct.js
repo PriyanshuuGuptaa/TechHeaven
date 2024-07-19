@@ -32,6 +32,7 @@ const CreateProduct = () => {
 
     const createProductHandler = async (e) => {
         e.preventDefault();
+        console.log(e)
 
         if (!title || !description || !price || !quantity || !rating || !discount || !selectedCategory) {
             toast.error("Please fill all the fields");
@@ -52,7 +53,7 @@ const CreateProduct = () => {
         images.forEach((image, index) => {
             formData.append('images', image);
         });
-
+        console.log(formData)
         try {
             const response = await axios.post(
                 "http://localhost:8080/api/v1/products/create-product",
@@ -104,17 +105,17 @@ const CreateProduct = () => {
                 </div>
 
                 <div className='create-product-details'>
-                    <div>
-                        <label htmlFor="category">Select a category:</label>
-                        <select id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-                            <option value="">Select a category</option>
-                            {categories.map(category => (
-                                <option key={category._id} value={category._id}>{category.categoryName}</option>
-                            ))}
-                        </select>
-                    </div>
-
                     <form onSubmit={createProductHandler} encType="multipart/form-data">
+                        <div>
+                            <label htmlFor="category">Select a category:</label>
+                            <select id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                                <option value="">Select a category</option>
+                                {categories.map(category => (
+                                    <option key={category._id} value={category._id}>{category.categoryName}</option>
+                                ))}
+                            </select>
+                        </div>
+
                         <div className='product-images'>
                             <label>Upload images:</label>
                             <input type="file" multiple onChange={uploadImage} />
@@ -184,7 +185,7 @@ const CreateProduct = () => {
                     </form>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

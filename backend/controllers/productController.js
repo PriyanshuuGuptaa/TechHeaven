@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 export const ProductController = async (req, res) => {
     try {
         console.log(req);
-        const { title, description, price, rating, shipping, quantity, category, slug, discount, featuredProduct } = req.fields;
+        const { title, description, price, rating, shipping, quantity, category, slug, discount, featuredProduct } = req.body;
 
         switch (true) {
             case !title:
@@ -60,8 +60,6 @@ export const ProductController = async (req, res) => {
             message: "Error in creating product",
             error
         });
-    } finally {
-        await client.close();
     }
 };
 
