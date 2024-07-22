@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
 
-const productImageSchema = new mongoose.Schema({
-    data: Buffer,
-    contentType: String,
-});
 
 const productSchema = new mongoose.Schema({
     title: {
@@ -48,13 +44,11 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     images: {
-        type: [productImageSchema],
-        validate: {
-            validator: function (val) {
-                return val.length <= 4;  // Updated the limit to 12 as per multer configuration
-            },
-            message: props => `${props.path} exceeds the limit of 12`
-        }
+        type: [{
+            data: Buffer,
+            contentType: String,
+        }],
+
     }
 });
 

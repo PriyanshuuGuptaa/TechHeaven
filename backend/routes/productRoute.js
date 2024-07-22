@@ -1,13 +1,11 @@
 import express from "express";
 import { isAdmin, requiresSignIn } from "../middlewares/authMiddleware.js";
-import { ProductController, UpdateProductController, allProducts, deleteProductController, getAllImages, productPhotoController, searchProductController, singleProductController } from "../controllers/productController.js";
+import { ProductController, UpdateProductController, allProducts, deleteProductController, getAllImages, getImageById, searchProductController, singleProductController } from "../controllers/productController.js";
 import multer from "multer";
 import bodyParser from "body-parser";
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/')
-    },
+
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now();
         cb(null, file.fieldname + '-' + uniqueSuffix)
@@ -33,7 +31,7 @@ router.delete("/delete-product/:pid", requiresSignIn, isAdmin, deleteProductCont
 router.get("/all-products", allProducts);
 router.get("/single-product/:pid", singleProductController);
 router.get("/:pid/images", getAllImages);
-router.post('/:pid/images', productPhotoController);
+router.get("/:pid/images/:imageId", getImageById);
 router.put("/update-product/:id", UpdateProductController);
 router.get("/search/:keyword", searchProductController);
 

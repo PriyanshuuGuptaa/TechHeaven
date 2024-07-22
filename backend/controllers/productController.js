@@ -4,8 +4,9 @@ import slugify from "slugify";
 import mongoose from "mongoose";
 
 export const ProductController = async (req, res) => {
+
+
     try {
-        console.log(req);
         const { title, description, price, rating, shipping, quantity, category, slug, discount, featuredProduct } = req.body;
 
         switch (true) {
@@ -30,7 +31,7 @@ export const ProductController = async (req, res) => {
             default:
                 break;
         }
-
+        console.log(req.files)
         const images = req.files.map(file => ({
             filename: file.originalname,
             contentType: file.mimetype,
@@ -128,69 +129,52 @@ export const deleteProductController = async (req, res) => {
     }
 };
 
-//upload photo
 
-
-export const productPhotoController = async (req, res) => {
-    uploadImages(req, res, async (err) => {
-        if (err) {
-            return res.status(400).send({ success: false, message: "Error while uploading images", err });
-        }
-
-        try {
-            // Find the product by ID
-            const product = await productModel.findById(req.params.pid);
-
-            if (!product) {
-                return res.status(404).send({ success: false, message: "Product not found" });
-            }
-
-            // Iterate over each file and add it to the product's image array
-            req.files.forEach((file) => {
-                const newImage = {
-                    image: {
-                        data: file.buffer, // Buffer containing the image data
-                        contentType: file.mimetype // Image MIME type
-                    }
-                };
-                product.image.push(newImage);
-            });
-
-            // Save the product document
-            await product.save();
-
-            res.status(200).send({
-                success: true,
-                message: "Images uploaded successfully",
-                image: product.image
-            });
-        } catch (error) {
-            console.log(error);
-            res.status(500).send({
-                success: false,
-                message: "Error while saving images",
-                error,
-            });
-        }
-    });
-};
 //get photo
 
 export const getAllImages = async (req, res) => {
     try {
-        const product = await productModel.findById(req.params.pid).select('image');
+
+        const product = await productModel.findById(req.params.pid).select('images');
+        console.log(product)
         if (!product) {
             return res.status(404).send({ success: false, message: "Product not found" });
         }
-        console.log(product)
+        const imagesWithUrls = product.images.map(image => {
+            return {
+                _id: image._id,
+                contentType: image.contentType,
+                url: `http://localhost:8080/api/v1/products/${req.params.pid}/images/${image._id}`
+            };
+        });
 
-        res.status(200).send({ success: true, images: product.image });
+        res.status(200).send({ success: true, images: imagesWithUrls });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, message: "Error while fetching images", error });
     }
 }
 
+// Controller to get the binary data of a specific image by its ID
+export const getImageById = async (req, res) => {
+    try {
+        const product = await productModel.findById(req.params.pid).select('images');
+        if (!product) {
+            return res.status(404).send({ success: false, message: "Product not found" });
+        }
+
+        const image = product.images.id(req.params.imageId);
+        if (!image) {
+            return res.status(404).send({ success: false, message: "Image not found" });
+        }
+
+        res.set('Content-Type', image.contentType);
+        res.send(image.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, message: "Error while fetching image", error });
+    }
+};
 //update product 
 export const UpdateProductController = async (req, res) => {
     try {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Buffer } from 'buffer';
 
 const ProductImages = ({ productId, index }) => {
     const [images, setImages] = useState([]);
@@ -9,12 +8,21 @@ const ProductImages = ({ productId, index }) => {
     useEffect(() => {
         const fetchImages = async () => {
             try {
+                // Fetch the image metadata from the server
                 const response = await axios.get(`http://localhost:8080/api/v1/products/${productId}/images`);
-                if (response.data && response.data.images) {
-                    setImages(response.data.images);
-                } else {
-                    setError('No images found.');
-                }
+                const imageMetadata = response.data.images;
+                // Fetch each image's binary data using its ID
+                const fetchedImages = await Promise.all(imageMetadata.map(async (imageMeta) => {
+                    const imageResponse = await axios.get(imageMeta.url, { responseType: 'arraybuffer' });
+                    console.log(imageResponse.data)
+                    const imageBlob = new Blob([imageResponse.data], { type: imageMeta.contentType });
+                    console.log(imageBlob)
+                    const imageUrl = URL.createObjectURL(imageBlob);
+                    console.log(imageUrl)
+                    return { ...imageMeta, src: imageUrl };
+                }));
+
+                setImages(fetchedImages);
             } catch (error) {
                 console.error('Error fetching images:', error);
                 setError('Failed to fetch images.');
@@ -26,16 +34,15 @@ const ProductImages = ({ productId, index }) => {
 
     return (
         <div>
-            <div >
-                {error && <p>{error}</p>}
-                {!error && images.length > 0 && images[index] && images[index].image && images[index].image.data ? (
-                    <img
-                        src={`data:${images[index].image.contentType};base64,${Buffer.from(images[index].image.data).toString('base64')}`}
-                        alt={`Image ${index}`}
-                    />
-                ) : (""
-                )}
-            </div>
+            {error && <p>{error}</p>}
+            {images.length > 0 && images[index] ? (
+                <img
+                    src={images[index].src}
+                    alt={`Image ${index}`}
+                />
+            ) : (
+                <p>Loading...</p>
+            )}
         </div>
     );
 };
