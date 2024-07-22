@@ -1,10 +1,15 @@
 import categoryModel from "../models/categoryModel.js";
+import fs from "fs";
+
 
 
 
 export const createCategoryController = async (req, res) => {
+    console.log(req.fields)
+    console.log(req.files)
     try {
-        const { categoryName } = req.body;
+        const { categoryName } = req.fields;
+        const { categoryImage } = req.files;
         if (!categoryName) {
             return res.status(401).send({
                 success: false,
@@ -19,7 +24,12 @@ export const createCategoryController = async (req, res) => {
             })
         }
 
-        const category = await new categoryModel({ categoryName }).save();
+        const category = new categoryModel({ categoryName });
+        if (categoryImage) {
+            category.categoryImage.data = fs.readFileSync(categoryImage.path);
+            category.categoryImage.contentType = categoryImage.type;
+        }
+        await category.save();
         res.status(201).send({
             success: true,
             message: "Category created",

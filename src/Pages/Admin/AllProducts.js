@@ -102,9 +102,7 @@ const AllProducts = () => {
                                 <div className='delete-btn'>
                                     <button onClick={() => { deleteProductHandler(product._id) }} >Delete</button>
                                 </div>
-                                <div className='update-btn'>
-                                    <button onClick={() => { updateProductHandler(product._id) }}>Update</button>
-                                </div>
+
                             </div>
                         ))}
                     </div>

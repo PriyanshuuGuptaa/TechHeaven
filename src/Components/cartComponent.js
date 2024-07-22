@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ProductImages from "./ProductImage";
 
 const CartComponent = ({ productId, title, price, category, discount, qty, img, onQuantityChange }) => {
   const [quantity, setQuantity] = useState(qty);
@@ -106,7 +107,7 @@ const CartComponent = ({ productId, title, price, category, discount, qty, img, 
     <div>
       <div className="items">
         <div className="item-image">
-          <img src={img} alt="productimage" />
+          <ProductImages productId={productId} index={0} />
         </div>
         <div className="item-details">
           <div className="item-nameandtype">

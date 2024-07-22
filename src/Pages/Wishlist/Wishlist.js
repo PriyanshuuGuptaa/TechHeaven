@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import emptycartimage from "../../Assets/emptycartimg.png";
 import { Link, json } from "react-router-dom";
 import "./WishList.css";
+import ProductImages from '../../Components/ProductImage';
 
 
 const Wishlist = () => {
@@ -34,6 +35,7 @@ const Wishlist = () => {
                     Authorization: token
                 }
             });
+            console.log(response.data)
             if (response.data.success) {
                 setWishList(response.data.wishListItems);
                 const productIds = response.data.wishListItems.map(item => item.productId);
@@ -101,11 +103,12 @@ const Wishlist = () => {
             <div className="cart-item-display">
                 {productDetails.map(item => {
                     return (
+
                         <div key={item._id} className="item-container">
                             <div className="wishlist-component-container">
                                 <div className="items">
                                     <div className="item-image">
-                                        <img src={`http://localhost:8080/api/v1/products/product-photo/${item._id}`} alt="productimage" />
+                                        <ProductImages productId={item._id} index={0} />
                                     </div>
                                     <div className="item-details">
                                         <div className="item-nameandtype">

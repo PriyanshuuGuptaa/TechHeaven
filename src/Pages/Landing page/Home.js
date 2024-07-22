@@ -103,7 +103,6 @@ function Home({ state, dipatch }) {
           <Slider {...settings}>
 
             {state.products.map((info) => {
-              console.log(info)
               return info.featuredProduct ? (
                 <div className="featured-product-card">
                   <ProductImages productId={info._id} index={0} />

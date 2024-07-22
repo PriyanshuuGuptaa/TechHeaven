@@ -33,6 +33,9 @@ const CreateCategory = () => {
     const handleClose = () => setOpen(false);
     const [updatedName, setupdatedName] = useState("");
     const [id, setId] = useState("");
+    const [categoryImage, setCategoryImage] = useState();
+    const [imagePreviews, setImagePreviews] = useState([]);
+
 
     const buttons = [
         <Button key="one" sx={{ borderColor: 'black' }}>
@@ -65,9 +68,16 @@ const CreateCategory = () => {
 
     //create category
     const handleNewCategorySubmit = async (e) => {
+        console.log(e)
         e.preventDefault();
         try {
-            const { data } = await axios.post(`http://localhost:8080/api/v1/category/create-category`, { categoryName });
+            const formData = new FormData();
+            formData.append("categoryName", categoryName);
+            if (categoryImage) {
+
+                formData.append("categoryImage", categoryImage);
+            }
+            const { data } = await axios.post(`http://localhost:8080/api/v1/category/create-category`, formData);
             if (data?.success) {
                 toast.success(`${categoryName} is created`)
                 getAllCategories();
@@ -75,7 +85,7 @@ const CreateCategory = () => {
             }
 
         } catch (error) {
-            console.log("no")
+            console.log("Error in creating category")
         }
 
 
@@ -113,6 +123,13 @@ const CreateCategory = () => {
             console.log(error)
         }
     }
+    const uploadImage = (e) => {
+        const files = Array.from(e.target.files);
+        console.log(files[0], "files")
+        setCategoryImage(files[0]);
+        const filePreviews = files.map(file => URL.createObjectURL(file));
+        setImagePreviews(prevPreviews => [...prevPreviews, ...filePreviews]);
+    }
     return (
         <div className='admin-dashboard-container'>
             <h1>ADMIN DASHBOARD</h1>
@@ -131,6 +148,19 @@ const CreateCategory = () => {
                                 <TextField fullWidth label="Enter New Category" id="fullWidth" onChange={(e) => { setCategoryName(e.target.value) }} />
                             </Box>
 
+                            <div className='category-images'>
+                                <label>Upload image:</label>
+                                <input type="file" multiple onChange={uploadImage} />
+                                <div className='image-previews'>
+                                    {imagePreviews.map((img) => (
+                                        <img
+                                            src={img}
+                                            alt={`Preview`}
+                                            style={{ width: '100px', height: '100px', objectFit: 'cover', margin: '10px' }}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
                             <Button variant='contained' size="small" type='submit' sx={{ height: 55 }}>Submit</Button>
                         </form>
                     </div>
@@ -161,9 +191,12 @@ const CreateCategory = () => {
                                             <form onSubmit={updateCategory}>
                                                 <Box sx={style}>
                                                     <TextField fullWidth label="Enter New Category" id="fullWidth" onChange={(e) => { setupdatedName(e.target.value) }} />
+
                                                     <Button variant='contained' size="small" type='submit'>Submit</Button>
 
                                                 </Box>
+
+
                                             </form>
                                         </Modal>
 

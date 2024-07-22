@@ -268,7 +268,7 @@ export const getAllCartItems = async (req, res) => {
         // Find user and populate cart items
         const user = await userModel.findById(userId).populate({
             path: 'cartItems.productId',
-            model: 'product' // Ensure the correct model name is used here
+            model: 'Product' // Ensure the correct model name is used here
         });
 
         // Debug log to check user data
@@ -486,7 +486,7 @@ export const getAllWishListItems = async (req, res) => {
         // Find user and populate cart items
         const user = await userModel.findById(userId).populate({
             path: 'wishListItems.productId',
-            model: 'product'
+            model: 'Product'
         });
 
         // Debug log to check user data

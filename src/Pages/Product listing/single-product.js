@@ -92,7 +92,7 @@ const SingleProduct = () => {
             <div className='single-product-image'>
                 <div className="img-container">
                     <div className="other-images">
-                        {[1, 2, 3].map((index) => (
+                        {[0, 1, 2, 3].map((index) => (
                             <div
                                 key={index}
                                 onClick={() => changeImg(index)}
@@ -116,11 +116,11 @@ const SingleProduct = () => {
             <div className='single-product-details'>
                 <p id='category'>{singleProduct.category}</p>
                 <p id='title'><b>{singleProduct.title}</b></p>
-                {/* <p id='rating'>
+                <p id='rating'>
                     {Array.from({ length: productRating }, (_, i) => (
                         <StarIcon key={i} sx={{ color: 'orange' }} />
                     ))}
-                </p> */}
+                </p>
                 <div className='discountandprice'>
                     <p id='discountedPrice'>₹{(singleProduct.price - (singleProduct.price * (singleProduct.discount / 100))).toFixed(2)}</p>
                     <p id='actualPrice'>₹{singleProduct.price}</p>

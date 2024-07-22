@@ -32,6 +32,7 @@ const Cart = () => {
           Authorization: token
         }
       });
+      console.log(response.data.cartItems)
       if (response.data.success) {
         setCart(response.data.cartItems);
         const productIds = response.data.cartItems.map(item => item.productId);

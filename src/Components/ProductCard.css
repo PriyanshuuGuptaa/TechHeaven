@@ -5,7 +5,12 @@
   height: auto;
   flex-direction: column;
   margin: 5px;
-  border-radius: 10px;
+  border-radius: 25px;
+  padding-bottom: 10px;
+  background-color: rgb(250, 247, 247);
+  border: lightgrey 1px solid;
+  box-shadow: 1px 3px 6px lightgrey;
+  cursor: pointer;
 
 }
 
@@ -13,7 +18,6 @@
 .card-img img {
   width: 100%;
   height: 100%;
-  background-color: #F3F3F3;
   border-radius: 25px;
 }
 
@@ -24,11 +28,11 @@
 }
 
 .card-title {
-  width: 100%;
   margin: 0 22px 0;
 }
 
 .card-title p {
+  width: 100%;
   font-size: 17px;
   font-weight: 600;
   margin: 5px 0 0 0;
@@ -76,8 +80,7 @@
 }
 
 .card-details {
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
 }
 
 .card-details .card-rating {
@@ -92,7 +95,7 @@
 
   cursor: pointer;
   width: auto;
-  color: white;
+  color: black;
   transition: color 0.3s ease;
   position: absolute;
   z-index: 1;

@@ -118,9 +118,6 @@ const ProductCard = (info) => {
           <ProductImages productId={info.id} index={0} />
         </div>
         <div className="card-details">
-
-        </div>
-        <div>
           <div className="card-title">
             <p>{info.title}</p>
           </div>
