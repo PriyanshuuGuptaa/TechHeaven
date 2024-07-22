@@ -16,6 +16,7 @@ const CreateProduct = () => {
     const [featuredProduct, setFeaturedProduct] = useState(false);
     const [discount, setDiscount] = useState("");
     const [images, setImages] = useState([]);
+    const [imagePreviews, setImagePreviews] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,7 +33,6 @@ const CreateProduct = () => {
 
     const createProductHandler = async (e) => {
         e.preventDefault();
-        console.log(e)
 
         if (!title || !description || !price || !quantity || !rating || !discount || !selectedCategory) {
             toast.error("Please fill all the fields");
@@ -50,9 +50,10 @@ const CreateProduct = () => {
         formData.append('featuredProduct', featuredProduct);
         formData.append('category', selectedCategory);
 
-        images.forEach((image, index) => {
+        images.forEach((image) => {
             formData.append('images', image);
         });
+
         try {
             const response = await axios.post(
                 "http://localhost:8080/api/v1/products/create-product",
@@ -63,7 +64,6 @@ const CreateProduct = () => {
                     }
                 }
             );
-            console.log('Product created:', response.data);
 
             if (response.data.success) {
                 toast.success("Product Created Successfully");
@@ -80,6 +80,9 @@ const CreateProduct = () => {
     const uploadImage = (e) => {
         const files = Array.from(e.target.files);
         setImages(prevImages => [...prevImages, ...files]);
+
+        const filePreviews = files.map(file => URL.createObjectURL(file));
+        setImagePreviews(prevPreviews => [...prevPreviews, ...filePreviews]);
     };
 
     return (
@@ -107,7 +110,7 @@ const CreateProduct = () => {
                     <form onSubmit={createProductHandler} encType="multipart/form-data">
                         <div>
                             <label htmlFor="category">Select a category:</label>
-                            <select id="category" value={selectedCategory} onChange={(e) => { setSelectedCategory(e.target.value); console.log(e.target.value) }}>
+                            <select id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                                 <option value="">Select a category</option>
                                 {categories.map(category => (
                                     <option key={category._id} value={category.categoryName}>{category.categoryName}</option>
@@ -118,14 +121,16 @@ const CreateProduct = () => {
                         <div className='product-images'>
                             <label>Upload images:</label>
                             <input type="file" multiple onChange={uploadImage} />
-                            {images.map((img, index) => {
-                                <img
-                                    key={index}
-                                    src={URL.createObjectURL(img)}
-                                    alt={img.name}
-                                    style={{ width: '100px', height: '100px', objectFit: 'cover', margin: '10px' }}
-                                />
-                            })}
+                            <div className='image-previews'>
+                                {imagePreviews.map((img, index) => (
+                                    <img
+                                        key={index}
+                                        src={img}
+                                        alt={`Preview ${index}`}
+                                        style={{ width: '100px', height: '100px', objectFit: 'cover', margin: '10px' }}
+                                    />
+                                ))}
+                            </div>
                         </div>
 
                         <input
@@ -184,7 +189,7 @@ const CreateProduct = () => {
                     </form>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

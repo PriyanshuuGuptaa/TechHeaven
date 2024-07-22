@@ -5,10 +5,10 @@ import mongoose from "mongoose";
 
 export const ProductController = async (req, res) => {
 
-
     try {
         const { title, description, price, rating, shipping, quantity, category, slug, discount, featuredProduct } = req.body;
-
+        const imageArray = req.files;
+        console.log(imageArray)
         switch (true) {
             case !title:
                 return res.status(500).send({ message: "Error in creating title" });
@@ -31,12 +31,12 @@ export const ProductController = async (req, res) => {
             default:
                 break;
         }
-        console.log(req.files)
-        const images = req.files.map(file => ({
-            filename: file.originalname,
-            contentType: file.mimetype,
-            data: file.buffer
-        }));
+
+        const imageDoc = imageArray.map((img) => ({
+            data: fs.readFileSync(img.path),
+            contentType: img.mimetype
+        }))
+        console.log(imageDoc.data)
 
         const newProduct = new productModel({
             title,
@@ -49,7 +49,7 @@ export const ProductController = async (req, res) => {
             discount,
             featuredProduct,
             slug: slugify(title),
-            images
+            images: imageDoc
         });
 
         await newProduct.save();
