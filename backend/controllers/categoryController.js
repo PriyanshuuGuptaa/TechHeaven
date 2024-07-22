@@ -5,8 +5,7 @@ import fs from "fs";
 
 
 export const createCategoryController = async (req, res) => {
-    console.log(req.fields)
-    console.log(req.files)
+
     try {
         const { categoryName } = req.fields;
         const { categoryImage } = req.files;
@@ -44,7 +43,31 @@ export const createCategoryController = async (req, res) => {
         })
     }
 
+
 }
+
+export const getCategoryImage = async (req, res) => {
+    try {
+        const categoryImage = await categoryModel.findById(req.params.id).select("categoryImage");
+        if (categoryImage && categoryImage.categoryImage.data) {
+            console.log(categoryImage.categoryImage.data)
+            const imageBuffer = categoryImage.categoryImage.data;
+            const base64Image = imageBuffer.toString('base64');
+            const imageUrl = `data:${categoryImage.categoryImage.contentType};base64,${base64Image}`;
+            return res.status(200).json({ success: true, url: imageUrl });
+        } else {
+            return res.status(404).send({ success: false, message: "Image not found" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error while getting photo",
+            error,
+        });
+    }
+};
+
 
 export const updateCategoryController = async (req, res) => {
     try {

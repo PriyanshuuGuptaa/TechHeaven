@@ -9,7 +9,6 @@ import axios from "axios";
 const initialstate = {
   products: [],
   categories: [],
-  filteredProducts: [],
   filteredByCategory: [],
   cartQty: 0,
   totalprice: 0,
@@ -24,6 +23,7 @@ function App() {
   const getAllCategories = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/v1/category/allCategories");
+      console.log(response.data.allCategories[0])
       dispatch({ type: 'ALL_CATEGORIES', payload: response.data.allCategories });
       initialstate.categories = response.data.allCategories;
     } catch (error) {

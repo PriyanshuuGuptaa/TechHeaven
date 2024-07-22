@@ -8,7 +8,6 @@ export const ProductController = async (req, res) => {
     try {
         const { title, description, price, rating, shipping, quantity, category, slug, discount, featuredProduct } = req.body;
         const imageArray = req.files;
-        console.log(imageArray)
         switch (true) {
             case !title:
                 return res.status(500).send({ message: "Error in creating title" });
@@ -136,7 +135,6 @@ export const getAllImages = async (req, res) => {
     try {
 
         const product = await productModel.findById(req.params.pid).select('images');
-        console.log(product)
         if (!product) {
             return res.status(404).send({ success: false, message: "Product not found" });
         }

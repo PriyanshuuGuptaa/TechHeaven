@@ -4,7 +4,8 @@ const ProductReducer = (state, action) => {
       return {
         ...state,
         products: action.payload,
-        filteredProducts: action.payload
+        filteredProducts: action.payload,
+        filteredByCategory: action.payload
       };
     }
     case "ALL_CATEGORIES": {

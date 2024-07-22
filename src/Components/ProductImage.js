@@ -14,11 +14,8 @@ const ProductImages = ({ productId, index }) => {
                 // Fetch each image's binary data using its ID
                 const fetchedImages = await Promise.all(imageMetadata.map(async (imageMeta) => {
                     const imageResponse = await axios.get(imageMeta.url, { responseType: 'arraybuffer' });
-                    console.log(imageResponse.data)
                     const imageBlob = new Blob([imageResponse.data], { type: imageMeta.contentType });
-                    console.log(imageBlob)
                     const imageUrl = URL.createObjectURL(imageBlob);
-                    console.log(imageUrl)
                     return { ...imageMeta, src: imageUrl };
                 }));
 
@@ -46,5 +43,6 @@ const ProductImages = ({ productId, index }) => {
         </div>
     );
 };
+
 
 export default ProductImages;
