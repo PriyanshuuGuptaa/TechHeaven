@@ -54,22 +54,22 @@ const Register = () => {
       <label>REGISTER</label>
       <input type='textbox' placeholder='Username' required='true' value={username} onChange={(e) => {
         setUsername(e.target.value);
-      }}></input>
+      }} className='register-input'></input>
       <input type='textbox' placeholder='Email address' required='true' value={email} onChange={(e) => {
         setEmail(e.target.value);
-      }}></input>
+      }} className='register-input'></input>
       <input type='password' placeholder='Password' required='true' value={password} onChange={(e) => {
         setPassword(e.target.value);
-      }}></input>
+      }} className='register-input'></input>
       <input type='textbox' placeholder='Phone number' required='true' value={number} onChange={(e) => {
         setNumber(e.target.value);
-      }}></input>
+      }} className='register-input'></input>
       <input type='textbox' placeholder='Address' required='true' value={address} onChange={(e) => {
         setAddress(e.target.value);
-      }}></input>
+      }} className='register-input'></input>
       <input type='textbox' placeholder='What is your favorite sport' required='true' value={answer} onChange={(e) => {
         setAnswer(e.target.value);
-      }}></input>
+      }} className='register-input'></input>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}

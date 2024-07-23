@@ -58,8 +58,7 @@ const CreateCategory = () => {
     const getAllCategories = async () => {
         const category = await axios.get("http://localhost:8080/api/v1/category/allCategories");
         setCategories(category.data.allCategories);
-        console.log(category.data);
-        console.log(categories)
+
     }
 
     useEffect(() => {
@@ -68,7 +67,6 @@ const CreateCategory = () => {
 
     //create category
     const handleNewCategorySubmit = async (e) => {
-        console.log(e)
         e.preventDefault();
         try {
             const formData = new FormData();
@@ -125,7 +123,6 @@ const CreateCategory = () => {
     }
     const uploadImage = (e) => {
         const files = Array.from(e.target.files);
-        console.log(files[0], "files")
         setCategoryImage(files[0]);
         const filePreviews = files.map(file => URL.createObjectURL(file));
         setImagePreviews(prevPreviews => [...prevPreviews, ...filePreviews]);

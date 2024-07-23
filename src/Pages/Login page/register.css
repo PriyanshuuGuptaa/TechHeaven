@@ -1,4 +1,4 @@
-.register-container{
+.register-container {
     height: auto;
     width: 30%;
     margin: 2% auto;
@@ -9,20 +9,30 @@
     background-color: lightskyblue;
     padding: 50px;
     border-radius: 25px;
+    position: relative;
+    top: 80px;
 }
-.register-container label{
+
+.register-container label {
     text-align: center;
     font-size: 25px;
     margin: 10px 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.register-container input{
+
+.register-container .register-input {
     margin: 10px 0;
     padding: 10px;
     width: auto;
     border: 1px solid white;
+    border-radius: 10px;
 }
-.register-container button{
+
+.register-input::placeholder {
+    color: white;
+}
+
+.register-container button {
     padding: 10px;
     margin: 10px 0;
     background-color: lightskyblue;
@@ -30,7 +40,9 @@
     transition: 0.5s;
     color: white;
     border: 1px solid white;
+    border-radius: 10px;
 }
-.register-container button:hover{
+
+.register-container button:hover {
     background-color: rgb(199, 227, 255);
 }

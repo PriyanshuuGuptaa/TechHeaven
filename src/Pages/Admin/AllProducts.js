@@ -47,7 +47,6 @@ const AllProducts = () => {
 
     const deleteProductHandler = async (id) => {
         try {
-            console.log(id)
             const res = await axios.delete(`http://localhost:8080/api/v1/products/delete-product/${id}`);
             if (res.data.success) {
                 setAllProducts(prevProducts => prevProducts.filter(product => product._id !== id));

@@ -32,7 +32,6 @@ const Cart = () => {
           Authorization: token
         }
       });
-      console.log(response.data.cartItems)
       if (response.data.success) {
         setCart(response.data.cartItems);
         const productIds = response.data.cartItems.map(item => item.productId);
@@ -117,7 +116,6 @@ const Cart = () => {
             cart.find((e) => {
               if (e._id === item._id) {
                 setQty(e.quantity);
-                console.log(qty)
               }
             })
             return (

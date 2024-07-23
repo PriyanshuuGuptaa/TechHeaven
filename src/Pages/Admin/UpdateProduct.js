@@ -92,7 +92,6 @@ const UpdateProduct = () => {
         const fetchProducts = async () => {
             try {
                 const { res } = await axios.get(`http://localhost:8080/api/v1/products/all-products`);
-                console.log(res);
 
             } catch (error) {
                 toast.error("Not able to fetch information of the product")
@@ -103,7 +102,6 @@ const UpdateProduct = () => {
 
     const createProductHandler = async (e) => {
         e.preventDefault();
-        console.log(e)
         const formData = new FormData();
         formData.append('title', title);
         formData.append('description', description);
@@ -114,7 +112,6 @@ const UpdateProduct = () => {
         formData.append('shipping', shipping);
         formData.append('rating', rating);
         formData.append('featuredProduct', featuredProduct);
-        console.log(description, price, quantity, image, selectedCategory, shipping, rating, featuredProduct)
         try {
             const { data } = await axios.post(
                 `http://localhost:8080/api/v1/products/update-product/${e.id}`,
@@ -128,10 +125,10 @@ const UpdateProduct = () => {
                 navigate("/dashboard/admin/create-product");
             } else {
                 toast.error(data?.message);
+
             }
         } catch (error) {
             console.error("Error creating product:", error.response ? error.response.data : error.message);
-            console.log(error)
             toast.error("Error in creating product");
         }
     };

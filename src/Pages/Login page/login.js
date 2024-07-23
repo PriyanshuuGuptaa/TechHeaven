@@ -17,7 +17,6 @@ function Login() {
             const res = await axios.post(`http://localhost:8080/api/v1/auth/login`,
                 { email, password })
             if (res.data.success) {
-                console.log(res.data.user);
                 toast.success(res.data.message);
 
                 setAuth({
@@ -25,9 +24,7 @@ function Login() {
                     user: res.data.user,
                     token: res.data.token
                 });
-                console.log(res.data);
                 const { token, user } = res.data;
-                console.log(user.email)
                 localStorage.setItem("token", token);
                 localStorage.setItem("email", user.email);
                 localStorage.setItem("userId", user._id);
@@ -42,7 +39,7 @@ function Login() {
                 toast.error(res.data.message);
             }
         } catch (error) {
-            console.log(error)
+
             toast.error("Something went wrong!");
         }
     }
@@ -52,10 +49,10 @@ function Login() {
                 <label>LOGIN</label>
                 <input type='textbox' placeholder='Email address' required='true' value={email} onChange={(e) => {
                     setEmail(e.target.value);
-                }}></input>
+                }} className='login-input'></input>
                 <input type='password' placeholder='Password' required='true' value={password} onChange={(e) => {
                     setPassword(e.target.value);
-                }}></input>
+                }} className='login-input'></input>
                 <button type="submit">Login</button>
                 <button type="button" onClick={() => { navigate("/forgotPassword") }}>Forgot Password ?</button>
             </form>

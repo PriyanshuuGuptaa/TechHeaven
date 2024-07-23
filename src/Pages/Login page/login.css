@@ -1,4 +1,4 @@
-.login-container{
+.login-container {
     height: auto;
     width: 20%;
     margin: 2% auto;
@@ -9,20 +9,31 @@
     background-color: lightskyblue;
     padding: 50px;
     border-radius: 25px;
+    position: relative;
+    top: 80px;
 }
-.login-container label{
+
+.login-container label {
     text-align: center;
     font-size: 25px;
     margin: 10px 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.login-container input{
+
+.login-container .login-input {
     margin: 10px 0;
     padding: 10px;
     width: auto;
     border: 1px solid white;
+    border-radius: 10px;
+
 }
-.login-container button{
+
+.login-input::placeholder {
+    color: white;
+}
+
+.login-container button {
     padding: 10px;
     margin: 10px 0;
     background-color: lightskyblue;
@@ -30,7 +41,9 @@
     transition: 0.5s;
     color: white;
     border: 1px solid white;
+    border-radius: 10px;
 }
-.login-container button:hover{
+
+.login-container button:hover {
     background-color: rgb(199, 227, 255);
 }

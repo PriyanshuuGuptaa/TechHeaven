@@ -47,8 +47,6 @@ const ProductCard = (info) => {
 
 
       if (isInWishlist === false) {
-        console.log(isInWishlist)
-
         //request for adding item to wishlist
         const response = await axios.post(
           "http://localhost:8080/api/v1/auth/add-to-wishlist",
@@ -68,7 +66,6 @@ const ProductCard = (info) => {
       }
       else {
         try {
-          console.log(isInWishlist)
 
           const res = await axios.delete("http://localhost:8080/api/v1/auth/remove-wish-list-item", {
             headers: { Authorization: token },
@@ -123,7 +120,6 @@ const ProductCard = (info) => {
           </div>
           <div className="card-price">
             <p id="discountedprice">₹ {info.discountedPrice}</p>
-
           </div>
         </div>
       </div>

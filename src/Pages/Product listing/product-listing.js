@@ -28,7 +28,6 @@ const ProductListing = ({ state, dispatch }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  console.log(state.categories, "cate")
   const navigate = useNavigate();
 
 

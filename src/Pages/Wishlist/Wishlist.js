@@ -15,7 +15,6 @@ const Wishlist = () => {
     const userId = localStorage.getItem("userId");
 
     const [wishList, setWishList,] = useWishList();
-    console.log(wishList)
 
 
     useEffect(() => {
@@ -35,7 +34,6 @@ const Wishlist = () => {
                     Authorization: token
                 }
             });
-            console.log(response.data)
             if (response.data.success) {
                 setWishList(response.data.wishListItems);
                 const productIds = response.data.wishListItems.map(item => item.productId);
@@ -81,7 +79,6 @@ const Wishlist = () => {
             }
         );
         if (response.data.success) {
-            console.log(response.data.wishListItems)
             setWishList(response.data.wishListItems);
             fetchWishListItems();
             toast.success("Item removed from wish list");
