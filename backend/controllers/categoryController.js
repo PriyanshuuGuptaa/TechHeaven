@@ -35,7 +35,7 @@ export const createCategoryController = async (req, res) => {
             category
         })
     } catch (error) {
-        console.log(error)
+
         res.status(400).send({
             success: false,
             message: "Error in category",
@@ -50,7 +50,6 @@ export const getCategoryImage = async (req, res) => {
     try {
         const categoryImage = await categoryModel.findById(req.params.id).select("categoryImage");
         if (categoryImage && categoryImage.categoryImage.data) {
-            console.log(categoryImage.categoryImage.data)
             const imageBuffer = categoryImage.categoryImage.data;
             const base64Image = imageBuffer.toString('base64');
             const imageUrl = `data:${categoryImage.categoryImage.contentType};base64,${base64Image}`;
@@ -59,7 +58,6 @@ export const getCategoryImage = async (req, res) => {
             return res.status(404).send({ success: false, message: "Image not found" });
         }
     } catch (error) {
-        console.log(error);
         res.status(500).send({
             success: false,
             message: "Error while getting photo",
@@ -86,7 +84,6 @@ export const updateCategoryController = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
         res.status(400).send({
             success: false,
             message: "Error in updating category",
@@ -127,7 +124,6 @@ export const singleCategory = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
         res.status(400).send({
             success: false,
             message: "Error in fetching a single category"
@@ -149,7 +145,6 @@ export const deleteCategory = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
         res.status(400).send({
             success: false,
             message: "Error in deleting category"

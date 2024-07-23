@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import productModel from "../models/productModel.js";
 
 export const registerController = async (req, res) => {
-    console.log(req.body);
     try {
         const { username, email, password, number, address, answer, role } = req.body
         //validation
@@ -357,7 +356,6 @@ export const decrementCartItemQuantity = async (req, res) => {
             cartItems: user.cartItems
         });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ success: false, message: "Error decrementing quantity", error });
     }
 };
@@ -452,7 +450,6 @@ export const wishListController = async (req, res) => {
             wishListItems: user.wishListItems
         });
     } catch (error) {
-        console.error("Error:", error);
         res.status(500).json({
             success: false,
             message: "Something went wrong",
@@ -489,8 +486,7 @@ export const getAllWishListItems = async (req, res) => {
             model: 'Product'
         });
 
-        // Debug log to check user data
-        console.log('Fetched user:', user);
+
 
         if (!user) {
             return res.status(404).json({

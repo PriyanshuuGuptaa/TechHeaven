@@ -35,7 +35,6 @@ export const ProductController = async (req, res) => {
             data: fs.readFileSync(img.path),
             contentType: img.mimetype
         }))
-        console.log(imageDoc.data)
 
         const newProduct = new productModel({
             title,
@@ -54,7 +53,6 @@ export const ProductController = async (req, res) => {
         await newProduct.save();
         res.status(201).send({ success: true, message: "Product created successfully", product: newProduct });
     } catch (error) {
-        console.log(error);
         res.status(500).send({
             success: false,
             message: "Error in creating product",
@@ -75,7 +73,6 @@ export const allProducts = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error)
         res.status(401).send({
             success: false,
             message: "Error in fetching all products",
@@ -99,7 +96,6 @@ export const singleProductController = async (req, res) => {
             product,
         });
     } catch (error) {
-        console.log(error);
         res.status(500).send({
             success: false,
             message: "Eror while getitng single product",
@@ -119,7 +115,6 @@ export const deleteProductController = async (req, res) => {
             message: "Product Deleted successfully",
         });
     } catch (error) {
-        console.log(error);
         res.status(500).send({
             success: false,
             message: "Error while deleting product",
@@ -148,7 +143,6 @@ export const getAllImages = async (req, res) => {
 
         res.status(200).send({ success: true, images: imagesWithUrls });
     } catch (error) {
-        console.error(error);
         res.status(500).send({ success: false, message: "Error while fetching images", error });
     }
 }
@@ -169,7 +163,6 @@ export const getImageById = async (req, res) => {
         res.set('Content-Type', image.contentType);
         res.send(image.data);
     } catch (error) {
-        console.error(error);
         res.status(500).send({ success: false, message: "Error while fetching image", error });
     }
 };
@@ -214,7 +207,6 @@ export const UpdateProductController = async (req, res) => {
             products: updatedProduct
         });
     } catch (error) {
-        console.log(error);
         res.status(500).send({
             success: false,
             message: "Error while updating product",
@@ -238,7 +230,6 @@ export const searchProductController = async (req, res) => {
             .select("-image");
         res.json(results);
     } catch (error) {
-        console.log(error);
         res.status(400).send({
             success: false,
             message: "Error In Search Product API",

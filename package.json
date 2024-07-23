@@ -35,7 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "cross-env NODE_ENV=development node ./backend/server.js",
-    "dev": "concurrently \"npm start --prefix .\" \"npm run server --prefix ./backend\""
+    "dev": "concurrently \"npm start --prefix .\" \"npm run start --prefix ./backend\""
   },
   "eslintConfig": {
     "extends": "react-app"
