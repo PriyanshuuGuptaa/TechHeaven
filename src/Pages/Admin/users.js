@@ -27,22 +27,20 @@ const Users = () => {
 
     ];
     return (
-        <div>
+        <div className='admin-dashboard-container'>
             <h1>ADMIN DASHBOARD</h1>
-            <div className='admin-dashboard-container'>
-                <div className='admin-menu'>
-                    <ButtonGroup size="large" aria-label="Large button group" >
-                        {buttons}
-                    </ButtonGroup>
+            <div className='admin-menu'>
+                <ButtonGroup size="large" aria-label="Large button group" >
+                    {buttons}
+                </ButtonGroup>
 
-                </div>
-                <div className='admin-details'>
-                    <h3>Username = {auth?.user?.name}</h3>
-                    <h3>Email address = {auth?.user?.email}</h3>
-                    <h3>Address = {auth?.user?.address}</h3>
-                </div>
             </div>
-        </div>
+            <div className='admin-details'>
+                <h3>Username : {auth?.user?.name}</h3>
+                <h3>Email address : {auth?.user?.email}</h3>
+                <h3>Address : {auth?.user?.address}</h3>
+            </div>
+        </div >
     )
 }
 

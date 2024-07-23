@@ -117,7 +117,8 @@ const ProductListing = ({ state, dispatch }) => {
           <div
             className="carousel-inner"
             style={{
-              transform: `translateX(${-currentIndex * 100}%)`,
+              display: "grid",
+              transform: `translateX(${-currentIndex * 100 / 5}%)`,
               gridTemplateColumns: `repeat(${state.categories.length}, 1fr)`
             }}
           >
@@ -126,8 +127,7 @@ const ProductListing = ({ state, dispatch }) => {
                 <div className="category-image-div">
                   <CategoryImage categoryId={category._id} id="categoryimg" />
                 </div>
-
-                <h3 className="carousel-title" onClick={() => { filterByCategory(category.categoryName) }}>{category.categoryName}</h3>
+                <p className="carousel-title" onClick={() => { filterByCategory(category.categoryName) }}>{category.categoryName}</p>
               </div>
             ))}
           </div>
@@ -137,12 +137,11 @@ const ProductListing = ({ state, dispatch }) => {
       <div className="product-listing-container">
         <div className="filters">
           <div className="filter-heading">
-            <Stack spacing={2} direction="row">
-              <Button variant="text" size="small" onClick={clearAllFilters} >Clear All</Button>
-            </Stack>
+            <p>FILTERS</p>
+            <button onClick={clearAllFilters} id="clear-filter-btn">Clear All Filters</button>
           </div>
 
-          <div className="filter-by-price">
+          <div className="filter-by-price filter-div">
             <h3>Filter by Price</h3>
             <Box sx={{ width: 300 }}>
               <Slider
@@ -158,7 +157,7 @@ const ProductListing = ({ state, dispatch }) => {
 
             </Box>
           </div>
-          <div className="filter-by-rating">
+          <div className="filter-by-rating filter-div">
             <FormLabel sx={{ color: "black" }}>
               <h3>Filter by Ratings</h3>
             </FormLabel>
@@ -170,7 +169,7 @@ const ProductListing = ({ state, dispatch }) => {
               ))}
             </FormControl>
           </div>
-          <div className="filter-by-discount">
+          <div className="filter-by-discount filter-div">
             <FormLabel id="demo-radio-buttons-group-label" sx={{ color: "black" }}>
               <h3>Filter by discount</h3>
             </FormLabel>

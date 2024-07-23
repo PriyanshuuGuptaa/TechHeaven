@@ -10,6 +10,8 @@
     padding: 1% 2%;
     height: auto;
     gap: 10px;
+    margin: 1% 0 0;
+
 
 }
 
@@ -44,7 +46,25 @@
 .product-listing-container .filters .filter-heading {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
+
+.product-listing-container .filters .filter-heading p {
+    font-weight: 600;
+}
+
+#clear-filter-btn {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+}
+
+.filter-div {
+    margin: 10% 0;
+}
+
+
 
 .product-card-div {
     position: relative;
@@ -68,6 +88,8 @@
 .carousel-container {
     width: 100%;
     margin: auto;
+    position: relative;
+    /* Added for positioning buttons */
 }
 
 .carousel-wrapper {
@@ -98,16 +120,23 @@
     justify-content: center;
 }
 
-.carousel-item .category-image-div {
-    width: 100px;
-    height: 110px;
+.carousel-item p {
+    font-size: 15px;
+    font-weight: 600;
 }
 
-.carousel-image {
+.carousel-item .category-image-div {
+    width: 90px;
+    height: 90px;
+}
+
+.carousel-item .category-image-div img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     margin: 0 auto;
+    object-fit: cover;
+    /* Ensures the image covers the div */
 }
 
 .carousel-title {
@@ -124,9 +153,9 @@
 /* Styles for the navigation buttons */
 .carousel-button {
     position: absolute;
-    top: 5%;
+    top: 50%;
+    transform: translateY(-50%);
     background-color: transparent;
-    color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -137,17 +166,20 @@
 }
 
 .carousel-button:hover {
-    background-color: rgb(88, 158, 229);
+    background-color: rgba(88, 158, 229, 0.8);
     color: white;
 }
 
-.carousel-container .carousel-button.left {
-    left: 0;
+.carousel-button.left {
+    left: 10px;
+    /* Adjust positioning as needed */
 }
 
-.carousel-container .carousel-button.right {
-    right: 0;
+.carousel-button.right {
+    right: 10px;
+    /* Adjust positioning as needed */
 }
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

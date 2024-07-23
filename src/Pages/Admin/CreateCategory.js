@@ -149,8 +149,8 @@ const CreateCategory = () => {
                             </Box>
 
                             <div className='category-images'>
-                                <label>Upload image:</label>
-                                <input type="file" multiple onChange={uploadImage} />
+                                <label htmlFor='category-input' className='category-input-label'>Upload image:</label>
+                                <input type="file" multiple onChange={uploadImage} id='category-input' />
                                 <div className='image-previews'>
                                     {imagePreviews.map((img) => (
                                         <img
@@ -161,7 +161,7 @@ const CreateCategory = () => {
                                     ))}
                                 </div>
                             </div>
-                            <Button variant='contained' size="small" type='submit' sx={{ height: 55 }}>Submit</Button>
+                            <button type='submit' className='category-submit-btn'>Submit</button>
                         </form>
                     </div>
                     <div className='category-table'>
@@ -172,16 +172,14 @@ const CreateCategory = () => {
                             {categories.map((e) => {
                                 return <>
                                     <tr>
-                                        <td key={e._id}>{e.categoryName} </td>
-                                        <ButtonGroup variant="contained" aria-label="Basic button group" sx={{ marginLeft: 3 }}>
-                                            <td><Button variant="contained" aria-label="Basic button group" onClick={() => {
-                                                setOpen(true);
-                                                setId(e._id);
-                                            }}>Edit</Button></td>
-                                            <td><Button variant="contained" aria-label="Basic button group" onClick={() => { deleteCategory(e._id) }}>delete</Button>
-                                            </td>
+                                        <td key={e._id} className='category-list-name'>{e.categoryName} </td>
+                                        <td><button className='category-list-btn' onClick={() => {
+                                            setOpen(true);
+                                            setId(e._id);
+                                        }}>Edit</button></td>
+                                        <td><button className='category-list-btn delete' onClick={() => { deleteCategory(e._id) }}>Delete</button>
+                                        </td>
 
-                                        </ButtonGroup>
                                         <Modal
                                             open={open}
                                             onClose={handleClose}
@@ -191,12 +189,8 @@ const CreateCategory = () => {
                                             <form onSubmit={updateCategory}>
                                                 <Box sx={style}>
                                                     <TextField fullWidth label="Enter New Category" id="fullWidth" onChange={(e) => { setupdatedName(e.target.value) }} />
-
                                                     <Button variant='contained' size="small" type='submit'>Submit</Button>
-
                                                 </Box>
-
-
                                             </form>
                                         </Modal>
 

@@ -2,6 +2,8 @@
   padding: 40px 100px;
   margin: 10px 0;
   display: flex;
+  position: relative;
+  top: 50px;
 }
 
 .cart-item-display {
@@ -43,7 +45,7 @@
 
 .item-details #item-title {
   font-weight: 600;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .item-details #item-type {
@@ -107,14 +109,14 @@
 }
 
 .emptycart-container {
-  margin: 50px 100px 50px 100px;
-  padding: 30px 100px;
+  margin: 10% auto;
   width: 70%;
   height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 .emptycart-container img {

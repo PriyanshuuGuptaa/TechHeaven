@@ -5,6 +5,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import ProductCard from '../../Components/ProductCard';
 import { Button, ButtonGroup } from '@mui/material';
+import ProductImages from '../../Components/ProductImage';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 const AllProducts = () => {
     const navigate = useNavigate();
     const buttons = [
@@ -26,7 +29,6 @@ const AllProducts = () => {
 
     const [allProducts, setAllProducts] = useState([]);
     const [image, setImage] = useState();
-    const disableWishListBtn = true;
     const getAllProducts = async () => {
         try {
             const res = await axios.get("http://localhost:8080/api/v1/products/all-products");
@@ -71,44 +73,45 @@ const AllProducts = () => {
     }, [])
 
     return (
-        <div>
+        <div className='admin-dashboard-container'>
             <h1>ADMIN DASHBOARD</h1>
-            <div className='admin-dashboard-container'>
-                <div className='admin-menu'>
-                    <ButtonGroup size="large" aria-label="Large button group" >
-                        {buttons}
-                    </ButtonGroup>
+            <div className='admin-menu'>
+                <ButtonGroup size="large" aria-label="Large button group" >
+                    {buttons}
+                </ButtonGroup>
 
-                </div>
+            </div>
 
-                <div className='all-products'>
-                    <h3>ALL PRODUCTS</h3>
-                    <div className='all-products-details'>
+            <div className='all-products'>
+                <h3>ALL PRODUCTS</h3>
+                <div className='all-products-details'>
+                    {allProducts.map((product) => (
+                        <div className="card-div">
+                            <button
+                                onClick={() => deleteProductHandler(product._id)}
+                                id='all-product-delete-btn'
+                            >
+                                <DeleteIcon />
+                            </button>
 
-                        {allProducts.map((product) => (
-                            <div className="product-card-div">
-                                <ProductCard
-                                    key={product._id}
-                                    id={product._id}
-                                    img={`http://localhost:8080/api/v1/products/product-photo/${product._id}`}
-                                    category={product.category}
-                                    title={product.title}
-                                    price={product.price}
-                                    discount={product.discount}
-                                    rating={product.rating}
-                                    discountedPrice={(product.price - (((product.price) * (10)) / 100))}
-                                    disableWishListBtn={disableWishListBtn}
-                                />
-                                <div className='delete-btn'>
-                                    <button onClick={() => { deleteProductHandler(product._id) }} >Delete</button>
+                            <div className="card-container">
+                                <div className="card-img">
+                                    <ProductImages productId={product._id} index={0} />
                                 </div>
-
+                                <div className="card-details">
+                                    <div className="card-title">
+                                        <p>{product.title}</p>
+                                    </div>
+                                    <div className="card-price">
+                                        <p id="discountedprice">₹ {(product.price - ((product.price * product.discount) / 100))}</p>
+                                    </div>
+                                </div>
                             </div>
-                        ))}
-                    </div>
-
-
+                        </div>
+                    ))}
                 </div>
+
+
             </div>
         </div >)
 }

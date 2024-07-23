@@ -108,19 +108,20 @@ const CreateProduct = () => {
 
                 <div className='create-product-details'>
                     <form onSubmit={createProductHandler} encType="multipart/form-data">
-                        <div>
-                            <label htmlFor="category">Select a category:</label>
+                        <div className='category-dropdown'>
                             <select id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                                 <option value="">Select a category</option>
                                 {categories.map(category => (
-                                    <option key={category._id} value={category.categoryName}>{category.categoryName}</option>
+                                    <option key={category._id} value={category.categoryName} id='category-option'>{category.categoryName}</option>
                                 ))}
                             </select>
                         </div>
 
                         <div className='product-images'>
-                            <label>Upload images:</label>
-                            <input type="file" multiple onChange={uploadImage} />
+                            <div className='image-upload'>
+                                <input type="file" multiple onChange={uploadImage} id='image-upload-button' />
+                                <label htmlFor="image-upload-button">Upload any 4 images:</label>
+                            </div>
                             <div className='image-previews'>
                                 {imagePreviews.map((img, index) => (
                                     <img
@@ -138,36 +139,42 @@ const CreateProduct = () => {
                             placeholder='Enter name of product'
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
+                            className='product-input'
                         />
                         <input
                             type='text'
                             placeholder='Enter description of product'
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            className='product-input'
                         />
                         <input
                             type='text'
                             placeholder='Enter price of product'
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
+                            className='product-input'
                         />
                         <input
                             type='text'
                             placeholder='Enter quantity of product'
                             value={quantity}
                             onChange={(e) => setQuantity(e.target.value)}
+                            className='product-input'
                         />
                         <input
                             type='text'
                             placeholder='Enter rating of product'
                             value={rating}
                             onChange={(e) => setRating(e.target.value)}
+                            className='product-input'
                         />
                         <input
                             type='text'
                             placeholder='Enter discount of product'
                             value={discount}
                             onChange={(e) => setDiscount(e.target.value)}
+                            className='product-input'
                         />
                         <label>
                             Shipping:
@@ -175,6 +182,7 @@ const CreateProduct = () => {
                                 type='checkbox'
                                 checked={shipping}
                                 onChange={(e) => setShipping(e.target.checked)}
+                                className='product-input'
                             />
                         </label>
                         <label>
@@ -183,6 +191,7 @@ const CreateProduct = () => {
                                 type='checkbox'
                                 checked={featuredProduct}
                                 onChange={(e) => setFeaturedProduct(e.target.checked)}
+                                className='product-input'
                             />
                         </label>
                         <button type='submit'>SUBMIT</button>

@@ -30,7 +30,7 @@ const CategoryImage = ({ categoryId }) => {
                 <img
                     src={imageUrl}
                     alt={`Category ${categoryId}`}
-                    style={{ width: '100%', height: 'auto' }}
+                    style={{ width: '100%', height: '100%' }}
                 />
             ) : (
                 <p>Loading...</p>
