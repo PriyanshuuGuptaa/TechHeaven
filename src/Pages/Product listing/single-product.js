@@ -27,7 +27,7 @@ const SingleProduct = () => {
         getProductInfo();
         const fetchImages = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/v1/products/${id}/images`);
+                const response = await axios.get(`https://techheaven-backend.onrender.com/api/v1/products/${id}/images`);
                 setImages(response.data.images);
             } catch (error) {
                 console.error('Error fetching images:', error);
@@ -39,7 +39,7 @@ const SingleProduct = () => {
 
     const getProductInfo = async () => {
         try {
-            const res = await axios.get(`http://localhost:8080/api/v1/products/single-product/${id}`);
+            const res = await axios.get(`https://techheaven-backend.onrender.com/api/v1/products/single-product/${id}`);
             setSingleProduct(res.data.product);
         } catch (error) {
             console.error("Error fetching product info:", error);
@@ -53,7 +53,7 @@ const SingleProduct = () => {
             const formattedToken = `${token}`; // Ensure proper format
             const cartItem = { productId: product._id, quantity: 1 };
             const response = await axios.post(
-                "http://localhost:8080/api/v1/auth/add-to-cart",
+                "https://techheaven-backend.onrender.com/api/v1/auth/add-to-cart",
                 { token, cartItems: [cartItem] },
                 { headers: { Authorization: formattedToken } }
             );

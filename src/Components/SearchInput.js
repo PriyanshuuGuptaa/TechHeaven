@@ -12,7 +12,7 @@ const SearchInput = ({ state, dispatch }) => {
         e.preventDefault();
         try {
             const { data } = await axios.get(
-                `http://localhost:8080/api/v1/products/search/${values.keyword}`
+                `https://techheaven-backend.onrender.com/api/v1/products/search/${values.keyword}`
             );
             setValues({ ...values, results: data });
             navigate("/products");

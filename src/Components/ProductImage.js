@@ -9,7 +9,7 @@ const ProductImages = ({ productId, index }) => {
         const fetchImages = async () => {
             try {
                 // Fetch the image metadata from the server
-                const response = await axios.get(`http://localhost:8080/api/v1/products/${productId}/images`);
+                const response = await axios.get(`https://techheaven-backend.onrender.com/api/v1/products/${productId}/images`);
                 const imageMetadata = response.data.images;
                 // Fetch each image's binary data using its ID
                 const fetchedImages = await Promise.all(imageMetadata.map(async (imageMeta) => {

@@ -198,7 +198,6 @@ const ProductListing = ({ state, dispatch }) => {
                 <ProductCard
                   key={product._id}
                   id={product._id}
-                  img={`http://localhost:8080/api/v1/products/product-photo/${product._id}`}
                   category={product.category}
                   title={product.title}
                   price={product.price}

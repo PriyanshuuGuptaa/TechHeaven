@@ -12,7 +12,7 @@ const CartComponent = ({ productId, title, price, category, discount, qty, img, 
     try {
 
       const response = await axios.post(
-        "http://localhost:8080/api/v1/auth/increment-cart-item",
+        "https://techheaven-backend.onrender.com/api/v1/auth/increment-cart-item",
         { userId, productId },
         {
           headers: { Authorization: token }
@@ -42,7 +42,7 @@ const CartComponent = ({ productId, title, price, category, discount, qty, img, 
 
       if (newQuantity <= 0) {
         const response = await axios.delete(
-          "http://localhost:8080/api/v1/auth/remove-cart-item",
+          "https://techheaven-backend.onrender.com/api/v1/auth/remove-cart-item",
           {
             headers: { Authorization: token },
             data: { userId, productId }
@@ -59,7 +59,7 @@ const CartComponent = ({ productId, title, price, category, discount, qty, img, 
         }
       } else {
         const response = await axios.post(
-          "http://localhost:8080/api/v1/auth/decrement-cart-item",
+          "https://techheaven-backend.onrender.com/api/v1/auth/decrement-cart-item",
           { userId, productId },
           {
             headers: { Authorization: token }
@@ -84,7 +84,7 @@ const CartComponent = ({ productId, title, price, category, discount, qty, img, 
   const handleRemoveItem = async () => {
 
     const response = await axios.delete(
-      "http://localhost:8080/api/v1/auth/remove-cart-item",
+      "https://techheaven-backend.onrender.com/api/v1/auth/remove-cart-item",
       {
         headers: { Authorization: token },
         data: { userId, productId }

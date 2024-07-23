@@ -14,7 +14,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:8080/api/v1/auth/login`,
+            const res = await axios.post(`https://techheaven-backend.onrender.com/api/v1/auth/login`,
                 { email, password })
             if (res.data.success) {
                 toast.success(res.data.message);

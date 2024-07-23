@@ -8,7 +8,7 @@ const CategoryImage = ({ categoryId }) => {
     useEffect(() => {
         const fetchImage = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/v1/category/category-image/${categoryId}`);
+                const response = await axios.get(`https://techheaven-backend.onrender.com/api/v1/category/category-image/${categoryId}`);
                 if (response.data.success) {
                     setImageUrl(response.data.url);
                 } else {

@@ -31,7 +31,7 @@ const AllProducts = () => {
     const [image, setImage] = useState();
     const getAllProducts = async () => {
         try {
-            const res = await axios.get("http://localhost:8080/api/v1/products/all-products");
+            const res = await axios.get("https://techheaven-backend.onrender.com/api/v1/products/all-products");
             if (res.data.success) {
                 setAllProducts(res.data.allProducts);
             }
@@ -47,7 +47,7 @@ const AllProducts = () => {
 
     const deleteProductHandler = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:8080/api/v1/products/delete-product/${id}`);
+            const res = await axios.delete(`https://techheaven-backend.onrender.com/api/v1/products/delete-product/${id}`);
             if (res.data.success) {
                 setAllProducts(prevProducts => prevProducts.filter(product => product._id !== id));
 

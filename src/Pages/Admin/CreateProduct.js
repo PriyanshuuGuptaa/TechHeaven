@@ -22,7 +22,7 @@ const CreateProduct = () => {
     useEffect(() => {
         const getAllCategories = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/v1/category/allCategories");
+                const response = await axios.get("https://techheaven-backend.onrender.com/api/v1/category/allCategories");
                 setCategories(response.data.allCategories);
             } catch (error) {
                 toast.error("Failed to load categories");
@@ -56,7 +56,7 @@ const CreateProduct = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:8080/api/v1/products/create-product",
+                "https://techheaven-backend.onrender.com/api/v1/products/create-product",
                 formData,
                 {
                     headers: {

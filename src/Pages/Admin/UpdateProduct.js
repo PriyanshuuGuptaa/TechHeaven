@@ -75,7 +75,7 @@ const UpdateProduct = () => {
 
     const getAllCategories = async () => {
         try {
-            const category = await axios.get("http://localhost:8080/api/v1/category/allCategories");
+            const category = await axios.get("https://techheaven-backend.onrender.com/api/v1/category/allCategories");
             setCategories(category.data.allCategories);
         } catch (error) {
             toast.error("Failed to load categories");
@@ -91,7 +91,7 @@ const UpdateProduct = () => {
         //fetching all products
         const fetchProducts = async () => {
             try {
-                const { res } = await axios.get(`http://localhost:8080/api/v1/products/all-products`);
+                const { res } = await axios.get(`https://techheaven-backend.onrender.com/api/v1/products/all-products`);
 
             } catch (error) {
                 toast.error("Not able to fetch information of the product")
@@ -114,7 +114,7 @@ const UpdateProduct = () => {
         formData.append('featuredProduct', featuredProduct);
         try {
             const { data } = await axios.post(
-                `http://localhost:8080/api/v1/products/update-product/${e.id}`,
+                `https://techheaven-backend.onrender.com/api/v1/products/update-product/${e.id}`,
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
