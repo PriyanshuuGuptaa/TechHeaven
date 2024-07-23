@@ -10,6 +10,7 @@ const SearchInput = ({ state, dispatch }) => {
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(e)
         try {
             const { data } = await axios.get(
                 `http://localhost:8080/api/v1/products/search/${values.keyword}`

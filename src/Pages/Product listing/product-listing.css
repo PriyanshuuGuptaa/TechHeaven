@@ -90,6 +90,7 @@
     margin: auto;
     position: relative;
     /* Added for positioning buttons */
+    overflow: hidden;
 }
 
 .carousel-wrapper {
@@ -103,7 +104,6 @@
     display: grid;
     transition: transform 0.5s ease-in-out;
     width: 100%;
-    overflow: hidden;
     height: auto;
 }
 
