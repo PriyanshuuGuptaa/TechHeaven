@@ -8,7 +8,6 @@ const categorySchema = new mongoose.Schema({
     categoryImage: {
         data: Buffer,
         contentType: String
-
     }
 
 }, { timestamps: true });

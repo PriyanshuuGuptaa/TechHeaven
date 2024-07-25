@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 import { useAuth } from "../../Context/authContext";
 import phonebanner from "../../Assets/phonebanner.gif";
@@ -10,6 +10,7 @@ import ReactPlayer from "react-player";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 import ProductImages from "../../Components/ProductImage";
+import axios from "axios";
 function Home({ state, dipatch }) {
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -182,6 +183,7 @@ function Home({ state, dipatch }) {
         </div>
 
       </div>
+
     </div>
 
 
