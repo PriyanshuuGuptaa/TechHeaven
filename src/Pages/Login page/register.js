@@ -32,7 +32,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`https://techheaven-backend.onrender.com/api/v1/auth/register`,
+      const res = await axios.post(`${process.env.BACKEND_URL}/api/v1/auth/register`,
         { username, email, password, number, address, answer, role })
       if (res.data.success) {
         toast.success(res.data.message);

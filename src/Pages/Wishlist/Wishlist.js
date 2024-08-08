@@ -29,7 +29,7 @@ const Wishlist = () => {
                 toast.error("User is not authenticated");
                 return;
             }
-            const response = await axios.get("https://techheaven-backend.onrender.com/api/v1/auth/wish-list-items", {
+            const response = await axios.get(`${process.env.BACKEND_URL}/api/v1/auth/wish-list-items`, {
                 headers: {
                     Authorization: token
                 }
@@ -50,7 +50,7 @@ const Wishlist = () => {
         try {
             const productResponses = await Promise.all(
                 productIds.map(id =>
-                    axios.get(`https://techheaven-backend.onrender.com/api/v1/products/single-product/${id._id}`)));
+                    axios.get(`${process.env.BACKEND_URL}/api/v1/products/single-product/${id._id}`)));
 
 
             const products = productResponses.map(response => {
@@ -72,7 +72,7 @@ const Wishlist = () => {
     const handleRemoveItem = async (productId) => {
 
         const response = await axios.delete(
-            "https://techheaven-backend.onrender.com/api/v1/auth/remove-wish-list-item",
+            `${process.env.BACKEND_URL}/api/v1/auth/remove-wish-list-item`,
             {
                 headers: { Authorization: token },
                 data: { userId, productId }

@@ -114,7 +114,7 @@ const UpdateProduct = () => {
         formData.append('featuredProduct', featuredProduct);
         try {
             const { data } = await axios.post(
-                `https://techheaven-backend.onrender.com/api/v1/products/update-product/${e.id}`,
+                `${process.env.BACKEND_URL}/api/v1/products/update-product/${e.id}`,
                 formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'

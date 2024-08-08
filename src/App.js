@@ -22,7 +22,7 @@ function App() {
   // Fetch categories
   const getAllCategories = async () => {
     try {
-      const response = await axios.get("https://techheaven-backend.onrender.com/api/v1/category/allCategories");
+      const response = await axios.get(`${process.env.BACKEND_URL}//api/v1/category/allCategories`);
       dispatch({ type: 'ALL_CATEGORIES', payload: response.data.allCategories });
       initialstate.categories = response.data.allCategories;
     } catch (error) {
@@ -33,7 +33,7 @@ function App() {
   // Fetch products
   const getAllProducts = async () => {
     try {
-      const response = await axios.get("https://techheaven-backend.onrender.com/api/v1/products/all-products");
+      const response = await axios.get(`${process.env.BACKEND_URL}/api/v1/products/all-products`);
       dispatch({ type: 'ALL_PRODUCTS', payload: response.data.allProducts });
 
     } catch (error) {

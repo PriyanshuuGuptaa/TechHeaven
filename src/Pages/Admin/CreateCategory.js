@@ -56,7 +56,7 @@ const CreateCategory = () => {
     ];
 
     const getAllCategories = async () => {
-        const category = await axios.get("https://techheaven-backend.onrender.com/api/v1/category/allCategories");
+        const category = await axios.get(`${process.env.BACKEND_URL}/api/v1/category/allCategories`);
         setCategories(category.data.allCategories);
 
     }
@@ -75,7 +75,7 @@ const CreateCategory = () => {
 
                 formData.append("categoryImage", categoryImage);
             }
-            const { data } = await axios.post(`https://techheaven-backend.onrender.com/api/v1/category/create-category`, formData);
+            const { data } = await axios.post(`${process.env.BACKEND_URL}/api/v1/category/create-category`, formData);
             if (data?.success) {
                 toast.success(`${categoryName} is created`)
                 getAllCategories();
@@ -92,7 +92,7 @@ const CreateCategory = () => {
     //delete category
     const deleteCategory = async (id) => {
         try {
-            const { data } = await axios.delete(`https://techheaven-backend.onrender.com/api/v1/category/deleteCategory/${id}`);
+            const { data } = await axios.delete(`${process.env.BACKEND_URL}/api/v1/category/deleteCategory/${id}`);
             if (data.success) {
                 toast.success("category deleted");
                 getAllCategories();
@@ -110,7 +110,7 @@ const CreateCategory = () => {
     //update category 
     const updateCategory = async () => {
         try {
-            const { data } = await axios.put(`https://techheaven-backend.onrender.com/api/v1/category/update-category/${id}`, { categoryName: updatedName });
+            const { data } = await axios.put(`${process.env.BACKEND_URL}/api/v1/category/update-category/${id}`, { categoryName: updatedName });
             if (data.success) {
                 toast.success("category updated ");
                 getAllCategories();

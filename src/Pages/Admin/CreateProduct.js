@@ -56,7 +56,7 @@ const CreateProduct = () => {
 
         try {
             const response = await axios.post(
-                "https://techheaven-backend.onrender.com/api/v1/products/create-product",
+                `${process.env.BACKEND_URL}/api/v1/products/create-product`,
                 formData,
                 {
                     headers: {

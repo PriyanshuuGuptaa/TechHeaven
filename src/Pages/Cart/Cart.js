@@ -27,7 +27,7 @@ const Cart = () => {
         toast.error("User is not authenticated");
         return;
       }
-      const response = await axios.get("https://techheaven-backend.onrender.com/api/v1/auth/cart-items", {
+      const response = await axios.get(`${process.env.BACKEND_URL}/api/v1/auth/cart-items`, {
         headers: {
           Authorization: token
         }
@@ -49,7 +49,7 @@ const Cart = () => {
   const fetchProductDetails = async (productIds) => {
     try {
       const productResponses = await Promise.all(
-        productIds.map(id => axios.get(`https://techheaven-backend.onrender.com/api/v1/products/single-product/${id._id}`))
+        productIds.map(id => axios.get(`${process.env.BACKEND_URL}/api/v1/products/single-product/${id._id}`))
       );
 
 
@@ -127,7 +127,7 @@ const Cart = () => {
                   category={item.category}
                   discount={item.discount}
                   quantity={item.quantity}
-                  img={`https://techheaven-backend.onrender.com/api/v1/products/product-photo/${item._id}`}
+                  img={`${process.env.BACKEND_URL}/api/v1/products/product-photo/${item._id}`}
                   qty={qty}
                   onQuantityChange={onQuantityChange}
 
