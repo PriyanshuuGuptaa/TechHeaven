@@ -28,18 +28,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-    return <p>Hello</p>
-})
+
 //routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", productRoute);
 
-// Handle all other routes by serving the index.html file
-app.use("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "build/index.html"));
-})
+
 
 //PORT
 const PORT = process.env.BACKEND_PORT || 5000;
