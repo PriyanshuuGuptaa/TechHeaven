@@ -3,8 +3,8 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import bodyParser from "body-parser";
-import connectDB from "../backend/config/db.js";
-import productRoute from "../backend/routes/productRoute.js";
+import connectDB from "../config/db.js";
+import productRoute from "../routes/productRoute.js";
 
 // Connect to database
 connectDB();
