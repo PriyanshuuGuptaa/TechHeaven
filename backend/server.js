@@ -8,19 +8,17 @@ import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoute from "./routes/productRoute.js";
 import cors from "cors";
 import bodyParser from "body-parser";
-import path from "path";
-import { fileURLToPath } from "url";
 
-//configure env
+// configure environment variables
 dotenv.config();
 
-//database config
+// connect to the database
 connectDB();
 
-// rest object 
+// initialize express app
 const app = express();
 
-//middlewares
+// middlewares
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
@@ -28,20 +26,38 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//routes
+// API routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", productRoute);
 
-// Add a root route
+// root route
 app.get("/", (req, res) => {
     res.send("Hello from Backend!");
 });
 
-//PORT
+// 404 error handler
+app.use((req, res, next) => {
+    res.status(404).json({
+        success: false,
+        message: "API route not found",
+    });
+});
+
+// general error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);  // log the error for debugging purposes
+    res.status(500).json({
+        success: false,
+        message: "Something went wrong on the server",
+        error: err.message,
+    });
+});
+
+// define the port
 const PORT = process.env.BACKEND_PORT || 5000;
 
-// run listen
+// start the server
 app.listen(PORT, () => {
-    console.log(`server running on ${PORT}`.bgCyan.white);
+    console.log(`Server running on port ${PORT}`.bgCyan.white);
 });
