@@ -28,13 +28,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 //routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", productRoute);
 
-
+// Add a root route
+app.get("/", (req, res) => {
+    res.send("Hello from Backend!");
+});
 
 //PORT
 const PORT = process.env.BACKEND_PORT || 5000;
